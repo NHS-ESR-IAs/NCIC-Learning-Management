@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NCIC Learning & Development Hub - Course catalogue, ESR booking links, user guides, and compliance training for North Cumbria Integrated Care NHS Foundation Trust.">
+  <meta name="theme-color" content="#005EB8">
+  <title>NCIC Learning Management | Learning & Development Hub</title>
+
+  <!-- Preconnect & Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23005EB8'/><text x='50%' y='65%' font-family='sans-serif' font-weight='bold' font-size='40' fill='white' text-anchor='middle'>NHS</text></svg>">
+</head>
+<body>
+
+  <!-- Accessible Skip Link -->
+  <a href="#catalogue" class="skip-link">Skip to main course catalogue</a>
+
+  <!-- ==========================================================================
+       Site Header
+       ========================================================================== -->
+  <header class="site-header" role="banner">
+    <div class="container header-container">
+      <a href="#top" class="brand-section" aria-label="NCIC Learning Management Home">
+        <div class="nhs-logo-badge">NHS</div>
+        <div class="brand-text">
+          <span class="brand-title">North Cumbria Integrated Care</span>
+          <span class="brand-sub">Learning &amp; Development Hub</span>
+        </div>
+      </a>
+
+      <nav class="nav-actions" role="navigation" aria-label="Main Navigation">
+        <ul class="nav-links">
+          <li><a href="#catalogue" class="nav-link">📚 Catalogue</a></li>
+          <li><a href="#guides" class="nav-link">📖 User Guides</a></li>
+          <li><a href="#faqs" class="nav-link">❓ FAQs</a></li>
+        </ul>
+
+        <!-- Bookmarks Trigger -->
+        <button id="btnBookmarksTrigger" class="btn-secondary" aria-label="View Saved Bookmarks" title="View Saved Bookmarks">
+          <span>⭐ Bookmarks</span>
+          <span id="bookmarkBadge" class="badge" style="display:none;">0</span>
+        </button>
+
+        <!-- Help Drawer Trigger -->
+        <button id="btnHelpTrigger" class="btn-drawer-trigger" aria-label="Open Quick Help Drawer">
+          <span>☰ Quick Help</span>
+        </button>
+
+        <!-- Dark / Light Theme Toggle -->
+        <button id="themeToggleBtn" class="theme-toggle-btn" aria-label="Toggle Dark Mode" title="Toggle theme">
+          🌙
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       Hero Section with Gentle Waves
+       ========================================================================== -->
+  <section class="hero-section" id="top">
+    <div class="container hero-inner">
+      <div class="hero-pill">✨ Official NCIC Staff Resource</div>
+      <h1 class="hero-title">Learning &amp; Development Hub</h1>
+      <p class="hero-description">
+        Browse courses, access ESR direct enrollment links, view step-by-step compliance guides, and get support with your training record.
+      </p>
+
+      <!-- Instant Live Search Bar -->
+      <div class="hero-search-wrapper">
+        <div class="hero-search-box">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input 
+            type="search" 
+            id="heroSearchInput" 
+            class="hero-search-input" 
+            placeholder="Search 135+ courses, skills, topics, or delivery formats..." 
+            aria-label="Search courses"
+            autocomplete="off"
+          >
+          <button id="heroSearchClear" class="hero-search-clear" aria-label="Clear search input">✕</button>
+          <button id="heroSearchBtn" class="hero-search-btn" aria-label="Search">Find Course</button>
+        </div>
+      </div>
+
+      <!-- Quick Metrics -->
+      <div class="hero-quick-stats">
+        <div class="hero-stat-badge">
+          <span>📚 Total Courses:</span>
+          <strong id="statTotalCourses">135</strong>
+        </div>
+        <div class="hero-stat-badge">
+          <span>📂 Categories:</span>
+          <strong id="statTotalCategories">13</strong>
+        </div>
+        <div class="hero-stat-badge">
+          <span>📖 Guides &amp; FAQs:</span>
+          <strong id="statTotalGuides">14</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gentle Wave SVG Parallax (Clickable Trigger for Help Drawer) -->
+    <div class="waves-container" id="waveClickTrigger" title="Click wave banner to open quick help">
+      <svg class="wavesflex" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="wavesparallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7)" />
+          <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+          <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
+          <use xlink:href="#gentle-wave" x="48" y="7" fill="var(--bg-page)" />
+        </g>
+      </svg>
+      <div class="wave-hint">⚡ Click waves for Quick Help Drawer</div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       Controls & Filters Bar
+       ========================================================================== -->
+  <section class="controls-section" aria-label="Course Filters and Navigation">
+    <div class="container controls-wrapper">
+      
+      <!-- Filter Row -->
+      <div class="filter-row">
+        <!-- Delivery Format Pills -->
+        <div class="filter-group">
+          <span class="filter-label">Format:</span>
+          <button class="filter-pill format-filter-pill active" data-format="all">
+            All Formats
+          </button>
+          <button class="filter-pill format-filter-pill" data-format="Classroom">
+            👥 Classroom
+          </button>
+          <button class="filter-pill format-filter-pill" data-format="Virtual Classroom">
+            💻 Virtual (MS Teams)
+          </button>
+          <button class="filter-pill format-filter-pill" data-format="e-Learning">
+            🖥️ e-Learning
+          </button>
+        </div>
+
+        <!-- Accordion Controls -->
+        <div class="action-buttons-group">
+          <button id="expandAllBtn" class="btn-secondary" title="Expand all categories">
+            <span>⊞ Expand All</span>
+          </button>
+          <button id="collapseAllBtn" class="btn-secondary" title="Collapse all categories">
+            <span>⊟ Collapse All</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Category Quick Jump Row -->
+      <div class="category-jump-row" id="categoryJumpContainer" aria-label="Category Quick Links">
+        <!-- Injected dynamically via JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       Main Content Container
+       ========================================================================== -->
+  <main class="container main-content" id="mainContent">
+
+    <!-- Active Filter / Search Results Bar -->
+    <div id="resultsStatusBar" class="results-status-bar" style="display:none;">
+      <div id="resultsCount" class="results-count">Showing matching courses</div>
+      <button id="resultsResetBtn" class="results-reset-btn">✕ Reset Filters</button>
+    </div>
+
+    <!-- ======================================================================
+         1. Course Catalogue Section
+         ====================================================================== -->
+    <section id="catalogue" class="content-section" aria-labelledby="catalogueHeading">
+      <div class="section-header">
+        <div>
+          <h2 id="catalogueHeading" class="section-title">
+            <span>📚</span> Course Catalogue
+          </h2>
+          <p class="section-subtitle">
+            Colour-coded by category and delivery style. Click any course to launch its enrollment directly on ESR.
+          </p>
+        </div>
+      </div>
+
+      <!-- Categories & Courses Container -->
+      <div id="categoriesContainer" class="categories-container">
+        <!-- Rendered dynamically by js/app.js from js/data.js -->
+      </div>
+
+      <!-- Empty State -->
+      <div id="emptyState" class="empty-state" style="display:none;">
+        <div class="empty-state-icon">🔍</div>
+        <h3>No courses found</h3>
+        <p>We couldn't find any courses matching your current search and format filters. Try adjusting your keywords or clearing the filter.</p>
+        <button class="btn-secondary" onclick="document.getElementById('resultsResetBtn').click()">Clear All Filters</button>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         2. User Guides & Compliance Help Section
+         ====================================================================== -->
+    <section id="guides" class="content-section" aria-labelledby="guidesHeading">
+      <div class="section-header">
+        <div>
+          <h2 id="guidesHeading" class="section-title">
+            <span>📖</span> ESR &amp; Compliance User Guides
+          </h2>
+          <p class="section-subtitle">
+            Step-by-step interactive walkthroughs and PDF documents to help you navigate your ESR compliance portal.
+          </p>
+        </div>
+      </div>
+
+      <!-- Guides Grid Container -->
+      <div id="guidesContainer" class="guides-grid">
+        <!-- Rendered dynamically by js/app.js from js/data.js -->
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         3. Frequently Asked Questions (FAQs) Section
+         ====================================================================== -->
+    <section id="faqs" class="content-section" aria-labelledby="faqsHeading">
+      <div class="section-header">
+        <div>
+          <h2 id="faqsHeading" class="section-title">
+            <span>❓</span> Frequently Asked Questions
+          </h2>
+          <p class="section-subtitle">
+            Answers to common questions regarding mandatory training, certification renewal, and ESR compliance.
+          </p>
+        </div>
+      </div>
+
+      <!-- FAQs Container -->
+      <div id="faqsContainer" class="faqs-container">
+        <!-- Rendered dynamically by js/app.js from js/data.js -->
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       Slide-out Help Drawer (Replaces old LifeRay Sidenav)
+       ========================================================================== -->
+  <div id="helpDrawerBackdrop" class="drawer-backdrop" aria-hidden="true"></div>
+  <aside id="helpDrawer" class="help-drawer" role="dialog" aria-labelledby="drawerTitle" aria-modal="true">
+    <div class="drawer-header">
+      <h3 id="drawerTitle">Learning &amp; Development Help</h3>
+      <button id="btnHelpClose" class="btn-drawer-close" aria-label="Close help drawer">✕</button>
+    </div>
+    <div class="drawer-body">
+      
+      <!-- Quick Navigation -->
+      <div>
+        <div class="drawer-section-title">Quick Navigation</div>
+        <ul class="drawer-links-list">
+          <li class="drawer-link-item">
+            <a href="#catalogue" onclick="NCICApp.closeHelpDrawer()">
+              <span>📚 Course Catalogue (135 Courses)</span>
+              <span>→</span>
+            </a>
+          </li>
+          <li class="drawer-link-item">
+            <a href="#guides" onclick="NCICApp.closeHelpDrawer()">
+              <span>📖 ScribeHow &amp; PDF Guides</span>
+              <span>→</span>
+            </a>
+          </li>
+          <li class="drawer-link-item">
+            <a href="#faqs" onclick="NCICApp.closeHelpDrawer()">
+              <span>❓ Compliance FAQs</span>
+              <span>→</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Essential Guides Quick Links -->
+      <div>
+        <div class="drawer-section-title">Essential User Guides</div>
+        <ul class="drawer-links-list">
+          <li class="drawer-link-item">
+            <a href="https://scribehow.com/embed/How_to_Use_the_Compliance_Portlet__9dOjYztbRxGKyPVBHEPkZg" target="_blank" rel="noopener noreferrer">
+              <span>How to use My Compliance Portlet</span>
+              <span>↗</span>
+            </a>
+          </li>
+          <li class="drawer-link-item">
+            <a href="https://my.esr.nhs.uk/dashboard/webdav/cumbria-partnership-nhs-trust-262-/document_library/L%26D/HowtoUsetheCompliancePortlet.pdf" target="_blank" rel="noopener noreferrer">
+              <span>Compliance Portlet (PDF Guide)</span>
+              <span>↗</span>
+            </a>
+          </li>
+          <li class="drawer-link-item">
+            <a href="https://scribehow.com/shared/How_to_Use_the_Compliance_Portlet_Copy__2Xdu0UgvQhKTuyWdU_F2lA#e8ec4826" target="_blank" rel="noopener noreferrer">
+              <span>Subscribing to a Certification</span>
+              <span>↗</span>
+            </a>
+          </li>
+          <li class="drawer-link-item">
+            <a href="https://scribehow.com/shared/How_to_Use_the_Compliance_Portlet_Copy__2Xdu0UgvQhKTuyWdU_F2lA#684f48f5" target="_blank" rel="noopener noreferrer">
+              <span>Playing e-Learning Courses</span>
+              <span>↗</span>
+            </a>
+          </li>
+          <li class="drawer-link-item">
+            <a href="https://scribehow.com/shared/How_to_Use_the_Compliance_Portlet_Copy__2Xdu0UgvQhKTuyWdU_F2lA#22b100c3" target="_blank" rel="noopener noreferrer">
+              <span>Booking onto Classroom Training</span>
+              <span>↗</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Contact L&D Team Card -->
+      <div class="contact-card">
+        <h4>Need further assistance?</h4>
+        <p>If your training record has not updated or you have questions regarding role requirements, contact the L&amp;D Team:</p>
+        <p>
+          📧 <strong>Email:</strong> <a href="mailto:learninganddevelopment@ncic.nhs.uk">learninganddevelopment@ncic.nhs.uk</a>
+        </p>
+        <p style="font-size: 0.8rem; margin-top: 0.5rem; color: var(--text-muted);">
+          Please allow up to 24 hours for completed e-learning and subscriptions to reflect in your My Compliance portlet.
+        </p>
+      </div>
+
+    </div>
+  </aside>
+
+  <!-- ==========================================================================
+       Slide-out Bookmarks Drawer
+       ========================================================================== -->
+  <div id="bookmarksDrawerBackdrop" class="drawer-backdrop" aria-hidden="true"></div>
+  <aside id="bookmarksDrawer" class="bookmarks-drawer" role="dialog" aria-labelledby="bookmarksTitle" aria-modal="true">
+    <div class="drawer-header" style="background: var(--nhs-blue);">
+      <h3 id="bookmarksTitle">⭐ My Saved Courses</h3>
+      <button id="btnBookmarksClose" class="btn-drawer-close" aria-label="Close bookmarks drawer">✕</button>
+    </div>
+    <div class="drawer-body">
+      <p style="font-size: 0.85rem; color: var(--text-muted);">
+        Your shortlisted courses are saved in this browser for quick reference when logging into ESR.
+      </p>
+      <ul id="bookmarksList" class="bookmarks-list">
+        <!-- Rendered dynamically -->
+      </ul>
+      <div style="margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--border-light); display: flex; gap: 0.5rem;">
+        <button id="btnClearBookmarks" class="btn-secondary" style="flex: 1; color: var(--nhs-emergency-red); justify-content: center;">
+          Clear All
+        </button>
+        <button class="btn-secondary" onclick="window.print()" style="flex: 1; justify-content: center;">
+          🖨️ Print List
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ==========================================================================
+       ScribeHow Interactive Preview Modal
+       ========================================================================== -->
+  <div id="guideModalBackdrop" class="modal-backdrop" aria-hidden="true">
+    <div id="guideModal" class="modal-dialog" role="dialog" aria-labelledby="guideModalTitle" aria-modal="true">
+      <div class="modal-header">
+        <h3 id="guideModalTitle">Interactive Walkthrough</h3>
+        <button id="btnGuideModalClose" class="btn-modal-close" aria-label="Close walkthrough modal">✕</button>
+      </div>
+      <div class="modal-body">
+        <iframe id="guideModalIframe" class="modal-iframe" title="ScribeHow Walkthrough Viewer" src="about:blank" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Popup -->
+  <div id="toastNotification" class="toast-notification" role="status" aria-live="polite"></div>
+
+  <!-- ==========================================================================
+       Site Footer
+       ========================================================================== -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>North Cumbria Integrated Care</h4>
+          <p>
+            NHS Foundation Trust<br>
+            Learning &amp; Development Directorate<br>
+            Providing workforce education, compliance training, and professional development support.
+          </p>
+        </div>
+        <div class="footer-col">
+          <h4>Useful Links</h4>
+          <ul class="footer-links">
+            <li><a href="https://my.esr.nhs.uk" target="_blank" rel="noopener noreferrer">Electronic Staff Record (My ESR) ↗</a></li>
+            <li><a href="#catalogue">Browse Course Catalogue</a></li>
+            <li><a href="#guides">ESR Compliance Guides</a></li>
+            <li><a href="#faqs">Training &amp; Compliance FAQs</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Need Support?</h4>
+          <p>
+            For training queries, booking issues, or certification status assistance:<br>
+            📧 <a href="mailto:learninganddevelopment@ncic.nhs.uk">learninganddevelopment@ncic.nhs.uk</a>
+          </p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 North Cumbria Integrated Care NHS Foundation Trust. Standalone Learning Management Hub.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
