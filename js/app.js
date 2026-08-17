@@ -78,15 +78,7 @@
     renderFaqs();
     updateBookmarkBadge();
     bindEvents();
-
-    // Default: Expand first 2 categories on initial load
-    if (CATEGORIES_DATA.length > 0) {
-      state.expandedCategories.add(CATEGORIES_DATA[0].id);
-      if (CATEGORIES_DATA.length > 1) {
-        state.expandedCategories.add(CATEGORIES_DATA[1].id);
-      }
-      refreshCategoryExpansion();
-    }
+    // All categories remain collapsed by default on initial load
   }
 
   // --- Theme Management ---
