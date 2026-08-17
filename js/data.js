@@ -10,7 +10,7 @@ const APP_CONFIG = {
   shortName: 'NCIC',
   hubTitle: 'Learning & Development Hub',
   hubSubtitle: 'Course Catalogue, Compliance Guidance & ESR Booking Portal',
-  supportEmail: 'learninganddevelopment@ncic.nhs.uk',
+  supportEmail: 'LearningDevelopment@ncic.nhs.uk',
   lastUpdated: 'August 2026',
   version: '2.0.0'
 };
@@ -892,6 +892,30 @@ const CATEGORIES_DATA = [
           "h-100"
         ],
         "id": "course-4-13"
+      },
+      {
+        "title": "262 Valuable Appraisal for Appraisees",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&params=P6lja.VKGP5U69UkZ7E35-Rp5o4SBFM2dXwQW0Rf7D-jqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-4-14"
+      },
+      {
+        "title": "262 Valuable Appraisal for Appraisees Face to Face",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&params=sMDFBMZKtbr46UeFoKwn.38AWK3BHrwfn8RjVJcnOPTjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-4-15"
       }
     ],
     "id": "cat-4",
@@ -926,6 +950,30 @@ const CATEGORIES_DATA = [
         "id": "course-5-2"
       },
       {
+        "title": "262 Valuable Appraisal for Appraisees",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&params=P6lja.VKGP5U69UkZ7E35-Rp5o4SBFM2dXwQW0Rf7D-jqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-5-3"
+      },
+      {
+        "title": "262 Valuable Appraisal for Appraisees Face to Face",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&params=sMDFBMZKtbr46UeFoKwn.38AWK3BHrwfn8RjVJcnOPTjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-5-4"
+      },
+      {
         "title": "262 Learning Champions",
         "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=1VyCHtwUaxwk0Ygt_4newA..&params=1lzoCpS2gZqHzrV2W1TJqcU4bmN9DOmSyYyR3y90tr3jqmc8GjONz5gXLyN7DUgptax8Rco9sNU9t8L0CNyxAA",
         "delivery_type": "Virtual Classroom",
@@ -935,7 +983,7 @@ const CATEGORIES_DATA = [
           "btn-block",
           "h-100"
         ],
-        "id": "course-5-3"
+        "id": "course-5-5"
       },
       {
         "title": "262 Learning Champions Face to Face",
@@ -947,7 +995,7 @@ const CATEGORIES_DATA = [
           "btn-block",
           "h-100"
         ],
-        "id": "course-5-4"
+        "id": "course-5-6"
       },
       {
         "title": "262 Facilitations Skills",
@@ -959,7 +1007,7 @@ const CATEGORIES_DATA = [
           "btn-block",
           "h-100"
         ],
-        "id": "course-5-5"
+        "id": "course-5-7"
       },
       {
         "title": "262 Research and Digital Learning Skills to support\n                                                Leadership Practice",
@@ -971,7 +1019,7 @@ const CATEGORIES_DATA = [
           "btn-block",
           "h-100"
         ],
-        "id": "course-5-6"
+        "id": "course-5-8"
       },
       {
         "title": "262 Functional Skills Inductions",
@@ -983,7 +1031,7 @@ const CATEGORIES_DATA = [
           "btn-block",
           "h-100"
         ],
-        "id": "course-5-7"
+        "id": "course-5-9"
       },
       {
         "title": "262 Functional Skills Support Sessions",
@@ -995,7 +1043,7 @@ const CATEGORIES_DATA = [
           "btn-block",
           "h-100"
         ],
-        "id": "course-5-8"
+        "id": "course-5-10"
       },
       {
         "title": "262 Apprenticeship Development Event",
@@ -1007,7 +1055,7 @@ const CATEGORIES_DATA = [
           "btn-block",
           "h-100"
         ],
-        "id": "course-5-9"
+        "id": "course-5-11"
       },
       {
         "title": "262 NCIC Coaching Skills",
@@ -1019,7 +1067,7 @@ const CATEGORIES_DATA = [
           "btn-block",
           "h-100"
         ],
-        "id": "course-5-10"
+        "id": "course-5-12"
       },
       {
         "title": "262 Working Together Effectively",
@@ -1031,7 +1079,7 @@ const CATEGORIES_DATA = [
           "btn-block",
           "h-100"
         ],
-        "id": "course-5-11"
+        "id": "course-5-13"
       },
       {
         "title": "262 Confident Applications & Interview Skills",
@@ -1043,7 +1091,7 @@ const CATEGORIES_DATA = [
           "btn-block",
           "h-100"
         ],
-        "id": "course-5-12"
+        "id": "course-5-14"
       },
       {
         "title": "262 Efficient Time Management",
@@ -1055,7 +1103,7 @@ const CATEGORIES_DATA = [
           "btn-block",
           "h-100"
         ],
-        "id": "course-5-13"
+        "id": "course-5-15"
       },
       {
         "title": "262 Impactful Presentation Skills",
@@ -1067,7 +1115,7 @@ const CATEGORIES_DATA = [
           "btn-block",
           "h-100"
         ],
-        "id": "course-5-14"
+        "id": "course-5-16"
       }
     ],
     "id": "cat-5",
