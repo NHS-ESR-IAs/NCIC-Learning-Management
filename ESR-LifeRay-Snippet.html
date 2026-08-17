@@ -1,96 +1,283 @@
 <!-- ==========================================================================
-     NCIC Learning Management - ESR LifeRay Portlet Snippet
-     Embed this HTML into your LifeRay Web Content Display portlet in ESR.
-     Target Portal: https://nhs-esr-ias.github.io/NCIC-Learning-Management/
+     NCIC Learning Management - Bulletproof Scoped ESR LifeRay Portlet Snippet
+     - 100% CSS Isolated: Will NOT conflict with or override LifeRay portal CSS.
+     - Scoped with unique namespace 'ncic-esr-*' to prevent style bleed in/out.
+     - Target Portal: https://nhs-esr-ias.github.io/NCIC-Learning-Management/
      ========================================================================== -->
 
-<div class="ncic-esr-hub-widget" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 100%; margin: 15px auto; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 18px rgba(0, 48, 135, 0.12); border: 1px solid #c9d8eb; background: #ffffff;">
+<div id="ncic-esr-learning-hub-root" class="ncic-esr-hub-widget">
 
   <!-- Header Banner with Animated Waves -->
-  <div style="background: linear-gradient(135deg, #003087 0%, #005EB8 70%, #0072CE 100%); color: #ffffff; padding: 25px 20px 10px 20px; text-align: center; position: relative;">
-    <div style="display: inline-block; background: rgba(255, 255, 255, 0.2); padding: 4px 14px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 10px; border: 1px solid rgba(255,255,255,0.3);">
+  <div class="ncic-esr-header">
+    <div class="ncic-esr-pill">
       North Cumbria Integrated Care NHS Foundation Trust
     </div>
-    <h2 style="font-size: 24px; font-weight: 800; margin: 0 0 6px 0; color: #ffffff; text-shadow: 0 2px 4px rgba(0,0,0,0.2);">
+    <h2 class="ncic-esr-title">
       Learning &amp; Development Hub
     </h2>
-    <p style="font-size: 14px; margin: 0 auto 15px auto; max-width: 600px; opacity: 0.95; line-height: 1.4;">
-      Access 135+ courses, instant ESR booking links, step-by-step compliance walkthroughs, and helpful FAQs.
+    <p class="ncic-esr-desc">
+      Access 135+ courses, direct ESR enrollment links, step-by-step compliance walkthroughs, and helpful FAQs.
     </p>
 
-    <!-- Animated Wave Effect -->
-    <div style="position: relative; width: 100%; height: 40px; margin-bottom: -10px;">
-      <svg style="width: 100%; height: 40px;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none">
+    <!-- Animated Gentle Waves SVG -->
+    <div class="ncic-esr-wave-container">
+      <svg class="ncic-esr-waves-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none">
         <defs>
-          <path id="esr-gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+          <path id="ncic-esr-wave-path" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
         </defs>
-        <g class="esr-wavesparallax">
-          <use xlink:href="#esr-gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7)" />
-          <use xlink:href="#esr-gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
-          <use xlink:href="#esr-gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
-          <use xlink:href="#esr-gentle-wave" x="48" y="7" fill="#ffffff" />
+        <g class="ncic-esr-waves-group">
+          <use xlink:href="#ncic-esr-wave-path" x="48" y="0" fill="rgba(255,255,255,0.7)" />
+          <use xlink:href="#ncic-esr-wave-path" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+          <use xlink:href="#ncic-esr-wave-path" x="48" y="5" fill="rgba(255,255,255,0.3)" />
+          <use xlink:href="#ncic-esr-wave-path" x="48" y="7" fill="#ffffff" />
         </g>
       </svg>
     </div>
   </div>
 
   <!-- Body Content & Action Area -->
-  <div style="padding: 24px 20px; background: #ffffff; text-align: center;">
+  <div class="ncic-esr-body">
 
     <!-- Primary Launch Button -->
-    <a href="https://nhs-esr-ias.github.io/NCIC-Learning-Management/" target="_blank" rel="noopener noreferrer" 
-       style="display: inline-flex; align-items: center; justify-content: center; gap: 10px; background-color: #005EB8; color: #ffffff; text-decoration: none; font-size: 16px; font-weight: 700; padding: 14px 28px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 94, 184, 0.35); transition: all 0.2s ease; margin-bottom: 20px;">
+    <a href="https://nhs-esr-ias.github.io/NCIC-Learning-Management/" target="_blank" rel="noopener noreferrer" class="ncic-esr-btn-primary">
       <span>🚀 Open Learning Management Hub</span>
-      <span style="font-size: 18px;">↗</span>
+      <span class="ncic-esr-btn-arrow">↗</span>
     </a>
 
     <!-- Quick Features Grid -->
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-top: 10px; text-align: left;">
+    <div class="ncic-esr-grid">
       
-      <a href="https://nhs-esr-ias.github.io/NCIC-Learning-Management/#catalogue" target="_blank" rel="noopener noreferrer"
-         style="display: flex; align-items: flex-start; gap: 10px; padding: 12px; background: #F0F4F8; border-radius: 8px; text-decoration: none; color: #1E293B; border: 1px solid #E2E8F0; transition: background 0.15s ease;">
-        <span style="font-size: 20px; line-height: 1;">📚</span>
-        <div>
-          <div style="font-weight: 700; font-size: 13px; color: #003087;">135+ Course Catalogue</div>
-          <div style="font-size: 11px; color: #64748B; margin-top: 2px;">Clinical, Leadership, EDI &amp; more</div>
+      <a href="https://nhs-esr-ias.github.io/NCIC-Learning-Management/#catalogue" target="_blank" rel="noopener noreferrer" class="ncic-esr-card">
+        <span class="ncic-esr-card-icon">📚</span>
+        <div class="ncic-esr-card-content">
+          <div class="ncic-esr-card-heading">135+ Course Catalogue</div>
+          <div class="ncic-esr-card-sub">Clinical, Leadership, EDI &amp; more</div>
         </div>
       </a>
 
-      <a href="https://nhs-esr-ias.github.io/NCIC-Learning-Management/#guides" target="_blank" rel="noopener noreferrer"
-         style="display: flex; align-items: flex-start; gap: 10px; padding: 12px; background: #F0F4F8; border-radius: 8px; text-decoration: none; color: #1E293B; border: 1px solid #E2E8F0; transition: background 0.15s ease;">
-        <span style="font-size: 20px; line-height: 1;">📖</span>
-        <div>
-          <div style="font-weight: 700; font-size: 13px; color: #003087;">Compliance Guides</div>
-          <div style="font-size: 11px; color: #64748B; margin-top: 2px;">Interactive Scribe &amp; PDF help</div>
+      <a href="https://nhs-esr-ias.github.io/NCIC-Learning-Management/#guides" target="_blank" rel="noopener noreferrer" class="ncic-esr-card">
+        <span class="ncic-esr-card-icon">📖</span>
+        <div class="ncic-esr-card-content">
+          <div class="ncic-esr-card-heading">Compliance Guides</div>
+          <div class="ncic-esr-card-sub">Interactive Scribe &amp; PDF help</div>
         </div>
       </a>
 
-      <a href="https://nhs-esr-ias.github.io/NCIC-Learning-Management/#faqs" target="_blank" rel="noopener noreferrer"
-         style="display: flex; align-items: flex-start; gap: 10px; padding: 12px; background: #F0F4F8; border-radius: 8px; text-decoration: none; color: #1E293B; border: 1px solid #E2E8F0; transition: background 0.15s ease;">
-        <span style="font-size: 20px; line-height: 1;">❓</span>
-        <div>
-          <div style="font-weight: 700; font-size: 13px; color: #003087;">Training FAQs</div>
-          <div style="font-size: 11px; color: #64748B; margin-top: 2px;">Compliance &amp; certification support</div>
+      <a href="https://nhs-esr-ias.github.io/NCIC-Learning-Management/#faqs" target="_blank" rel="noopener noreferrer" class="ncic-esr-card">
+        <span class="ncic-esr-card-icon">❓</span>
+        <div class="ncic-esr-card-content">
+          <div class="ncic-esr-card-heading">Training FAQs</div>
+          <div class="ncic-esr-card-sub">Compliance &amp; certification support</div>
         </div>
       </a>
 
     </div>
 
-    <div style="margin-top: 16px; font-size: 12px; color: #64748B;">
-      Need assistance? Contact the L&amp;D Team at <a href="mailto:learninganddevelopment@ncic.nhs.uk" style="color: #005EB8; font-weight: 600; text-decoration: none;">learninganddevelopment@ncic.nhs.uk</a>
+    <!-- Footer note -->
+    <div class="ncic-esr-footer">
+      Need assistance? Contact the L&amp;D Team at 
+      <a href="mailto:learninganddevelopment@ncic.nhs.uk" class="ncic-esr-email-link">learninganddevelopment@ncic.nhs.uk</a>
     </div>
 
   </div>
 
+  <!-- Strictly Scoped CSS: All styles scoped under #ncic-esr-learning-hub-root -->
   <style>
-    .esr-wavesparallax > use {
-      animation: esr-move-forever 20s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
+    #ncic-esr-learning-hub-root.ncic-esr-hub-widget {
+      box-sizing: border-box !important;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
+      max-width: 100% !important;
+      margin: 15px auto !important;
+      border-radius: 12px !important;
+      overflow: hidden !important;
+      box-shadow: 0 4px 18px rgba(0, 48, 135, 0.12) !important;
+      border: 1px solid #c9d8eb !important;
+      background: #ffffff !important;
+      line-height: 1.5 !important;
+      text-align: center !important;
+      display: block !important;
+      clear: both !important;
     }
-    .esr-wavesparallax > use:nth-child(1) { animation-delay: -2s; animation-duration: 7s; }
-    .esr-wavesparallax > use:nth-child(2) { animation-delay: -3s; animation-duration: 10s; }
-    .esr-wavesparallax > use:nth-child(3) { animation-delay: -4s; animation-duration: 13s; }
-    .esr-wavesparallax > use:nth-child(4) { animation-delay: -5s; animation-duration: 20s; }
-    @keyframes esr-move-forever {
+
+    #ncic-esr-learning-hub-root * {
+      box-sizing: border-box !important;
+    }
+
+    #ncic-esr-learning-hub-root .ncic-esr-header {
+      background: linear-gradient(135deg, #003087 0%, #005EB8 70%, #0072CE 100%) !important;
+      color: #ffffff !important;
+      padding: 25px 20px 10px 20px !important;
+      text-align: center !important;
+      position: relative !important;
+      margin: 0 !important;
+    }
+
+    #ncic-esr-learning-hub-root .ncic-esr-pill {
+      display: inline-block !important;
+      background: rgba(255, 255, 255, 0.2) !important;
+      padding: 4px 14px !important;
+      border-radius: 20px !important;
+      font-size: 11px !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.5px !important;
+      text-transform: uppercase !important;
+      margin-bottom: 10px !important;
+      border: 1px solid rgba(255, 255, 255, 0.3) !important;
+      color: #ffffff !important;
+    }
+
+    #ncic-esr-learning-hub-root .ncic-esr-title {
+      font-size: 24px !important;
+      font-weight: 800 !important;
+      margin: 0 0 6px 0 !important;
+      padding: 0 !important;
+      color: #ffffff !important;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+      line-height: 1.25 !important;
+      border: none !important;
+    }
+
+    #ncic-esr-learning-hub-root .ncic-esr-desc {
+      font-size: 14px !important;
+      margin: 0 auto 15px auto !important;
+      padding: 0 !important;
+      max-width: 600px !important;
+      opacity: 0.95 !important;
+      line-height: 1.45 !important;
+      color: #ffffff !important;
+    }
+
+    #ncic-esr-learning-hub-root .ncic-esr-wave-container {
+      position: relative !important;
+      width: 100% !important;
+      height: 40px !important;
+      margin-bottom: -10px !important;
+    }
+
+    #ncic-esr-learning-hub-root .ncic-esr-waves-svg {
+      width: 100% !important;
+      height: 40px !important;
+      display: block !important;
+    }
+
+    #ncic-esr-learning-hub-root .ncic-esr-body {
+      padding: 24px 20px !important;
+      background: #ffffff !important;
+      text-align: center !important;
+      margin: 0 !important;
+    }
+
+    #ncic-esr-learning-hub-root .ncic-esr-btn-primary {
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 10px !important;
+      background-color: #005EB8 !important;
+      color: #ffffff !important;
+      text-decoration: none !important;
+      font-size: 16px !important;
+      font-weight: 700 !important;
+      padding: 14px 28px !important;
+      border-radius: 8px !important;
+      box-shadow: 0 4px 12px rgba(0, 94, 184, 0.35) !important;
+      transition: background-color 0.2s ease, transform 0.15s ease !important;
+      margin-bottom: 20px !important;
+      border: none !important;
+      cursor: pointer !important;
+    }
+
+    #ncic-esr-learning-hub-root .ncic-esr-btn-primary:hover {
+      background-color: #003087 !important;
+      color: #ffffff !important;
+      text-decoration: none !important;
+      transform: translateY(-1px) !important;
+    }
+
+    #ncic-esr-learning-hub-root .ncic-esr-btn-arrow {
+      font-size: 18px !important;
+      line-height: 1 !important;
+    }
+
+    #ncic-esr-learning-hub-root .ncic-esr-grid {
+      display: grid !important;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)) !important;
+      gap: 12px !important;
+      margin-top: 10px !important;
+      text-align: left !important;
+    }
+
+    #ncic-esr-learning-hub-root .ncic-esr-card {
+      display: flex !important;
+      align-items: flex-start !important;
+      gap: 10px !important;
+      padding: 12px !important;
+      background: #F0F4F8 !important;
+      border-radius: 8px !important;
+      text-decoration: none !important;
+      color: #1E293B !important;
+      border: 1px solid #E2E8F0 !important;
+      transition: background-color 0.15s ease, border-color 0.15s ease !important;
+    }
+
+    #ncic-esr-learning-hub-root .ncic-esr-card:hover {
+      background-color: #E2E8F0 !important;
+      border-color: #CBD5E1 !important;
+      text-decoration: none !important;
+      color: #003087 !important;
+    }
+
+    #ncic-esr-learning-hub-root .ncic-esr-card-icon {
+      font-size: 20px !important;
+      line-height: 1 !important;
+      flex-shrink: 0 !important;
+    }
+
+    #ncic-esr-learning-hub-root .ncic-esr-card-content {
+      display: flex !important;
+      flex-direction: column !important;
+    }
+
+    #ncic-esr-learning-hub-root .ncic-esr-card-heading {
+      font-weight: 700 !important;
+      font-size: 13px !important;
+      color: #003087 !important;
+      line-height: 1.3 !important;
+    }
+
+    #ncic-esr-learning-hub-root .ncic-esr-card-sub {
+      font-size: 11px !important;
+      color: #64748B !important;
+      margin-top: 2px !important;
+      line-height: 1.3 !important;
+    }
+
+    #ncic-esr-learning-hub-root .ncic-esr-footer {
+      margin-top: 16px !important;
+      font-size: 12px !important;
+      color: #64748B !important;
+      line-height: 1.4 !important;
+    }
+
+    #ncic-esr-learning-hub-root .ncic-esr-email-link {
+      color: #005EB8 !important;
+      font-weight: 600 !important;
+      text-decoration: none !important;
+    }
+
+    #ncic-esr-learning-hub-root .ncic-esr-email-link:hover {
+      text-decoration: underline !important;
+    }
+
+    /* Wave animation isolated with unique keyframes */
+    #ncic-esr-learning-hub-root .ncic-esr-waves-group > use {
+      animation: ncic-esr-wave-move 20s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite !important;
+    }
+    #ncic-esr-learning-hub-root .ncic-esr-waves-group > use:nth-child(1) { animation-delay: -2s !important; animation-duration: 7s !important; }
+    #ncic-esr-learning-hub-root .ncic-esr-waves-group > use:nth-child(2) { animation-delay: -3s !important; animation-duration: 10s !important; }
+    #ncic-esr-learning-hub-root .ncic-esr-waves-group > use:nth-child(3) { animation-delay: -4s !important; animation-duration: 13s !important; }
+    #ncic-esr-learning-hub-root .ncic-esr-waves-group > use:nth-child(4) { animation-delay: -5s !important; animation-duration: 20s !important; }
+
+    @keyframes ncic-esr-wave-move {
       0% { transform: translate3d(-90px, 0, 0); }
       100% { transform: translate3d(85px, 0, 0); }
     }
