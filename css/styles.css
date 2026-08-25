@@ -1464,8 +1464,31 @@ body {
 
 .footer-col p {
   font-size: 0.9rem;
-  opacity: 0.85;
+  opacity: 0.9;
   line-height: 1.6;
+}
+
+.footer-col p a,
+.footer-col a {
+  color: var(--nhs-warm-yellow);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--transition-fast), opacity var(--transition-fast);
+}
+
+.footer-col p a:hover,
+.footer-col a:hover {
+  color: #FFFFFF;
+  text-decoration: underline;
+}
+
+.footer-col p a:focus-visible,
+.footer-col a:focus-visible {
+  outline: 3px solid var(--nhs-yellow);
+  outline-offset: 2px;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-sm);
 }
 
 .footer-links {

@@ -223,7 +223,7 @@
         </div>
         <div class="course-title">${highlightedTitle}</div>
         <div class="course-card-actions">
-          <a href="${course.url}" target="_blank" rel="noopener noreferrer" class="btn-book-esr" title="Launch course enrollment in ESR">
+          <a href="${course.url}" target="_blank" rel="noopener noreferrer" class="btn-book-esr" title="Launch course enrolment in ESR">
             <span>Book / Launch in ESR</span> ↗
           </a>
           <button class="btn-bookmark ${isBookmarked ? 'bookmarked' : ''}" data-bookmark-id="${course.id}" title="${isBookmarked ? 'Remove from My Bookmarks' : 'Save to My Bookmarks'}">

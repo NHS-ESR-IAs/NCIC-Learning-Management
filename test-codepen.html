@@ -1,0 +1,4587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NCIC Learning Management Hub</title>
+  <style>
+/* ==========================================================================
+   NCIC Learning & Development Management Hub - Stylesheet
+   Design System: NHS Digital / Modern Clean Aesthetic
+   ========================================================================== */
+
+:root {
+  /* NHS Core Color Palette */
+  --nhs-blue: #005EB8;
+  --nhs-dark-blue: #003087;
+  --nhs-bright-blue: #0072CE;
+  --nhs-light-blue: #41B6E6;
+  --nhs-aqua-green: #00A499;
+  --nhs-green: #007F3B;
+  --nhs-dark-pink: #7C2855;
+  --nhs-yellow: #FFB81C;
+  --nhs-warm-yellow: #FFEB3B;
+  --nhs-emergency-red: #DA291C;
+  
+  /* Neutral Palette */
+  --bg-page: #F0F4F8;
+  --bg-surface: #FFFFFF;
+  --bg-surface-elevated: #FFFFFF;
+  --bg-subtle: #F8FAFC;
+  --text-main: #1E293B;
+  --text-muted: #64748B;
+  --text-inverse: #FFFFFF;
+  --border-light: #E2E8F0;
+  --border-subtle: #CBD5E1;
+  --border-focus: #FFEB3B;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 10px 25px -3px rgba(0, 0, 0, 0.09), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+  --shadow-xl: 0 20px 30px -10px rgba(0, 48, 135, 0.15);
+
+  /* Delivery Format Colors */
+  --fmt-classroom-bg: #EBF3FC;
+  --fmt-classroom-text: #0B4F9C;
+  --fmt-classroom-border: #93C5FD;
+  --fmt-classroom-badge: #2F5597;
+
+  --fmt-virtual-bg: #F5EEF8;
+  --fmt-virtual-text: #6A1B9A;
+  --fmt-virtual-border: #D8B4E2;
+  --fmt-virtual-badge: #8E24AA;
+
+  --fmt-elearning-bg: #E8F5E9;
+  --fmt-elearning-text: #1B5E20;
+  --fmt-elearning-border: #A5D6A7;
+  --fmt-elearning-badge: #2E7D32;
+
+  /* Layout & Transitions */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --container-max: 1280px;
+}
+
+/* Dark Mode Overrides */
+[data-theme="dark"] {
+  --bg-page: #0F172A;
+  --bg-surface: #1E293B;
+  --bg-surface-elevated: #334155;
+  --bg-subtle: #192231;
+  --text-main: #F1F5F9;
+  --text-muted: #94A3B8;
+  --border-light: #334155;
+  --border-subtle: #475569;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.5);
+
+  --fmt-classroom-bg: #1e293b;
+  --fmt-classroom-text: #93c5fd;
+  --fmt-classroom-border: #3b82f6;
+
+  --fmt-virtual-bg: #2d1e3e;
+  --fmt-virtual-text: #e9d5ff;
+  --fmt-virtual-border: #a855f7;
+
+  --fmt-elearning-bg: #143520;
+  --fmt-elearning-text: #a7f3d0;
+  --fmt-elearning-border: #10b981;
+}
+
+/* Base Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-page);
+  color: var(--text-main);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Skip link for accessibility */
+.skip-link {
+  position: absolute;
+  top: -50px;
+  left: 20px;
+  background: var(--nhs-yellow);
+  color: #000;
+  padding: 10px 16px;
+  font-weight: 700;
+  z-index: 10000;
+  border-radius: var(--radius-sm);
+  transition: top var(--transition-fast);
+  text-decoration: none;
+}
+.skip-link:focus {
+  top: 15px;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+/* ==========================================================================
+   Header & Top Navigation
+   ========================================================================== */
+.site-header {
+  position: sticky;
+  top: 0;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 2px solid var(--nhs-blue);
+  z-index: 1000;
+  box-shadow: var(--shadow-sm);
+  transition: background-color var(--transition-normal);
+}
+
+[data-theme="dark"] .site-header {
+  background: rgba(30, 41, 59, 0.95);
+  border-bottom-color: var(--nhs-bright-blue);
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  gap: 1rem;
+}
+
+.brand-section {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  text-decoration: none;
+  color: var(--text-main);
+}
+
+.nhs-logo-badge {
+  background-color: var(--nhs-blue);
+  color: #FFFFFF;
+  font-weight: 900;
+  font-size: 1.25rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 3px;
+  letter-spacing: -0.5px;
+  box-shadow: var(--shadow-sm);
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--nhs-dark-blue);
+  line-height: 1.2;
+}
+
+[data-theme="dark"] .brand-title {
+  color: var(--text-main);
+}
+
+.brand-sub {
+  font-size: 0.775rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  list-style: none;
+}
+
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 0.85rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-main);
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+
+.nav-link:hover, .nav-link:focus-visible {
+  background-color: var(--bg-subtle);
+  color: var(--nhs-blue);
+}
+
+.btn-drawer-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--nhs-blue);
+  color: #FFFFFF;
+  border: none;
+  padding: 0.55rem 1.1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+}
+
+.btn-drawer-trigger:hover {
+  background-color: var(--nhs-dark-blue);
+  transform: translateY(-1px);
+}
+
+.theme-toggle-btn {
+  background: transparent;
+  border: 1px solid var(--border-light);
+  color: var(--text-main);
+  padding: 0.55rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+}
+
+.theme-toggle-btn:hover {
+  background-color: var(--bg-subtle);
+}
+
+/* ==========================================================================
+   Hero Section with Gentle Waves Parallax
+   ========================================================================== */
+.hero-section {
+  position: relative;
+  background: linear-gradient(135deg, #003087 0%, #005EB8 60%, #0072CE 100%);
+  color: #FFFFFF;
+  overflow: hidden;
+  padding-top: 3rem;
+  text-align: center;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  padding-bottom: 2rem;
+}
+
+.hero-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(8px);
+  padding: 0.35rem 1rem;
+  border-radius: var(--radius-full);
+  font-size: 0.825rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.hero-title {
+  font-size: clamp(2rem, 4.5vw, 3.25rem);
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 1rem;
+  letter-spacing: -0.5px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.hero-description {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  max-width: 720px;
+  margin: 0 auto 2rem auto;
+  opacity: 0.92;
+  font-weight: 400;
+}
+
+/* Hero Search Bar */
+.hero-search-wrapper {
+  max-width: 680px;
+  margin: 0 auto 1.5rem auto;
+  position: relative;
+}
+
+.hero-search-box {
+  display: flex;
+  align-items: center;
+  background: #FFFFFF;
+  border-radius: var(--radius-full);
+  padding: 0.35rem 0.5rem 0.35rem 1.25rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+  border: 2px solid transparent;
+  transition: all var(--transition-fast);
+}
+
+.hero-search-box:focus-within {
+  border-color: var(--nhs-yellow);
+  box-shadow: 0 0 0 4px rgba(255, 235, 59, 0.4);
+}
+
+.hero-search-box svg {
+  color: var(--text-muted);
+  flex-shrink: 0;
+  margin-right: 0.5rem;
+}
+
+.hero-search-input {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 1.05rem;
+  color: #1E293B;
+  background: transparent;
+}
+
+.hero-search-input::placeholder {
+  color: #94A3B8;
+}
+
+.hero-search-clear {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: var(--radius-full);
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-search-clear:hover {
+  color: var(--text-main);
+}
+
+.hero-search-btn {
+  background: var(--nhs-blue);
+  color: #FFFFFF;
+  border: none;
+  border-radius: var(--radius-full);
+  padding: 0.75rem 1.5rem;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.hero-search-btn:hover {
+  background: var(--nhs-dark-blue);
+}
+
+.hero-quick-stats {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+.hero-stat-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(4px);
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.hero-stat-badge strong {
+  font-weight: 700;
+  color: var(--nhs-warm-yellow);
+}
+
+/* Gentle Waves SVG Animation */
+.waves-container {
+  position: relative;
+  width: 100%;
+  height: 90px;
+  margin-bottom: -1px;
+  min-height: 70px;
+  cursor: pointer;
+}
+
+.wavesflex {
+  display: block;
+  width: 100%;
+  height: 90px;
+}
+
+.wavesparallax > use {
+  animation: move-forever 25s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
+}
+
+.wavesparallax > use:nth-child(1) {
+  animation-delay: -2s;
+  animation-duration: 7s;
+}
+
+.wavesparallax > use:nth-child(2) {
+  animation-delay: -3s;
+  animation-duration: 10s;
+}
+
+.wavesparallax > use:nth-child(3) {
+  animation-delay: -4s;
+  animation-duration: 13s;
+}
+
+.wavesparallax > use:nth-child(4) {
+  animation-delay: -5s;
+  animation-duration: 20s;
+}
+
+@keyframes move-forever {
+  0% {
+    transform: translate3d(-90px, 0, 0);
+  }
+  100% {
+    transform: translate3d(85px, 0, 0);
+  }
+}
+
+.wave-hint {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 48, 135, 0.7);
+  color: #FFFFFF;
+  font-size: 0.75rem;
+  padding: 0.2rem 0.75rem;
+  border-radius: var(--radius-full);
+  pointer-events: none;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  opacity: 0.8;
+}
+
+/* ==========================================================================
+   Filter & Controls Bar
+   ========================================================================== */
+.controls-section {
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-light);
+  padding: 1.25rem 0;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  z-index: 10;
+}
+
+.controls-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.filter-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.filter-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-right: 0.25rem;
+}
+
+.filter-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.9rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-light);
+  background: var(--bg-subtle);
+  color: var(--text-main);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.filter-pill:hover {
+  background: var(--border-light);
+}
+
+.filter-pill.active {
+  background: var(--nhs-blue);
+  color: #FFFFFF;
+  border-color: var(--nhs-blue);
+  box-shadow: var(--shadow-sm);
+}
+
+.filter-pill .badge {
+  background: rgba(0, 0, 0, 0.1);
+  padding: 0.1rem 0.4rem;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+}
+
+.filter-pill.active .badge {
+  background: rgba(255, 255, 255, 0.25);
+  color: #FFFFFF;
+}
+
+.action-buttons-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.9rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-surface);
+  color: var(--text-main);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-secondary:hover {
+  background: var(--bg-subtle);
+  border-color: var(--text-muted);
+}
+
+/* Category Quick Jump Pills */
+.category-jump-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.25rem;
+  scrollbar-width: thin;
+}
+
+.jump-pill {
+  white-space: nowrap;
+  font-size: 0.8rem;
+  padding: 0.3rem 0.75rem;
+  background: var(--bg-subtle);
+  color: var(--text-muted);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  font-weight: 500;
+  transition: all var(--transition-fast);
+}
+
+.jump-pill:hover {
+  color: var(--nhs-blue);
+  border-color: var(--nhs-blue);
+  background: var(--bg-surface);
+}
+
+/* ==========================================================================
+   Main Content Layout
+   ========================================================================== */
+.main-content {
+  flex: 1;
+  padding: 2.5rem 0 4rem 0;
+}
+
+.content-section {
+  margin-bottom: 3.5rem;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid var(--border-light);
+  padding-bottom: 0.75rem;
+}
+
+.section-title {
+  font-size: 1.65rem;
+  font-weight: 800;
+  color: var(--nhs-dark-blue);
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+[data-theme="dark"] .section-title {
+  color: var(--text-main);
+}
+
+.section-subtitle {
+  font-size: 0.925rem;
+  color: var(--text-muted);
+}
+
+/* Results Status Bar */
+.results-status-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-surface);
+  padding: 0.85rem 1.25rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-light);
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.results-count {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.results-count span {
+  color: var(--nhs-blue);
+  font-weight: 800;
+}
+
+.results-reset-btn {
+  background: none;
+  border: none;
+  color: var(--nhs-emergency-red);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.results-reset-btn:hover {
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   Course Catalogue Categories & Cards
+   ========================================================================== */
+.categories-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.category-card {
+  background: var(--bg-surface);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: box-shadow var(--transition-normal);
+}
+
+.category-card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.category-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 1.4rem;
+  background: var(--cat-color, var(--nhs-blue));
+  color: #FFFFFF;
+  cursor: pointer;
+  user-select: none;
+  transition: opacity var(--transition-fast);
+}
+
+.category-header:hover {
+  opacity: 0.95;
+}
+
+.category-title-group {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.category-icon {
+  font-size: 1.35rem;
+  display: flex;
+  align-items: center;
+}
+
+.category-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0;
+  color: #FFFFFF;
+}
+
+.category-count-badge {
+  background: rgba(255, 255, 255, 0.25);
+  color: #FFFFFF;
+  padding: 0.2rem 0.65rem;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.category-toggle-icon {
+  font-size: 1.25rem;
+  transition: transform var(--transition-normal);
+}
+
+.category-card.collapsed .category-toggle-icon {
+  transform: rotate(-90deg);
+}
+
+.category-card.collapsed .category-body {
+  display: none;
+}
+
+.category-body {
+  padding: 1.25rem;
+  background: var(--cat-bg, var(--bg-subtle));
+}
+
+/* Course Cards Grid */
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1rem;
+}
+
+.course-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 1rem 1.15rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.85rem;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+.course-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-subtle);
+}
+
+.course-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.format-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.3px;
+}
+
+.format-badge.classroom {
+  background-color: var(--fmt-classroom-bg);
+  color: var(--fmt-classroom-text);
+  border: 1px solid var(--fmt-classroom-border);
+}
+
+.format-badge.virtual {
+  background-color: var(--fmt-virtual-bg);
+  color: var(--fmt-virtual-text);
+  border: 1px solid var(--fmt-virtual-border);
+}
+
+.format-badge.elearning {
+  background-color: var(--fmt-elearning-bg);
+  color: var(--fmt-elearning-text);
+  border: 1px solid var(--fmt-elearning-border);
+}
+
+.course-code-tag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  background: var(--bg-subtle);
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+}
+
+.course-title {
+  font-size: 0.975rem;
+  font-weight: 600;
+  color: var(--text-main);
+  line-height: 1.4;
+}
+
+.course-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: auto;
+}
+
+.btn-book-esr {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  background: var(--nhs-blue);
+  color: #FFFFFF;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.55rem 0.9rem;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+
+.btn-book-esr:hover {
+  background: var(--nhs-dark-blue);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-bookmark {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-light);
+  color: var(--text-muted);
+  padding: 0.55rem 0.65rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+}
+
+.btn-bookmark:hover {
+  color: var(--nhs-yellow);
+  border-color: var(--nhs-yellow);
+  background: #FFFDE7;
+}
+
+.btn-bookmark.bookmarked {
+  color: #E65100;
+  background: #FFE082;
+  border-color: #FFB300;
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 3.5rem 1rem;
+  background: var(--bg-surface);
+  border-radius: var(--radius-md);
+  border: 2px dashed var(--border-subtle);
+}
+
+.empty-state-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: var(--text-muted);
+}
+
+.empty-state h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-main);
+}
+
+.empty-state p {
+  color: var(--text-muted);
+  max-width: 450px;
+  margin: 0 auto 1.25rem auto;
+}
+
+/* ==========================================================================
+   User Guides & ScribeHow Section
+   ========================================================================== */
+.guides-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.25rem;
+}
+
+.guide-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+  border-left: 4px solid var(--nhs-bright-blue);
+}
+
+.guide-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.guide-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.guide-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.725rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-full);
+}
+
+.guide-badge.interactive {
+  background: #E0F2FE;
+  color: #0369A1;
+}
+
+.guide-badge.pdf {
+  background: #FEE2E2;
+  color: #B91C1C;
+}
+
+.guide-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.35;
+}
+
+.guide-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: auto;
+}
+
+.btn-guide-preview {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  background: var(--nhs-bright-blue);
+  color: #FFFFFF;
+  border: none;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.55rem 0.85rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+
+.btn-guide-preview:hover {
+  background: var(--nhs-blue);
+}
+
+.btn-guide-external {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-light);
+  color: var(--text-main);
+  text-decoration: none;
+  font-size: 0.85rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+
+.btn-guide-external:hover {
+  background: var(--border-light);
+}
+
+/* ==========================================================================
+   Frequently Asked Questions (FAQs) Accordion
+   ========================================================================== */
+.faqs-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.faq-item {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition-fast);
+}
+
+.faq-item:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.faq-question-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.15rem 1.4rem;
+  background: transparent;
+  border: none;
+  text-align: left;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-main);
+  cursor: pointer;
+  gap: 1rem;
+  transition: background-color var(--transition-fast);
+}
+
+.faq-question-btn:hover {
+  background-color: var(--bg-subtle);
+  color: var(--nhs-blue);
+}
+
+.faq-item.open .faq-question-btn {
+  background-color: var(--bg-subtle);
+  color: var(--nhs-blue);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.faq-icon {
+  font-size: 1.25rem;
+  color: var(--nhs-blue);
+  transition: transform var(--transition-normal);
+  flex-shrink: 0;
+}
+
+.faq-item.open .faq-icon {
+  transform: rotate(180deg);
+}
+
+.faq-answer {
+  display: none;
+  padding: 1.4rem;
+  color: var(--text-main);
+  font-size: 0.95rem;
+  line-height: 1.65;
+  background: var(--bg-surface);
+}
+
+.faq-item.open .faq-answer {
+  display: block;
+}
+
+.faq-answer ol, .faq-answer ul {
+  margin: 0.75rem 0 0.75rem 1.5rem;
+}
+
+.faq-answer li {
+  margin-bottom: 0.5rem;
+}
+
+/* ==========================================================================
+   Help & Information Slide-out Drawer (Sidenav)
+   ========================================================================== */
+.drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 2000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--transition-normal);
+}
+
+.drawer-backdrop.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.help-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  max-width: 480px;
+  background: var(--bg-surface);
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.25);
+  z-index: 2001;
+  transform: translateX(100%);
+  transition: transform var(--transition-normal);
+  display: flex;
+  flex-direction: column;
+}
+
+.help-drawer.open {
+  transform: translateX(0);
+}
+
+.drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  background: var(--nhs-dark-blue);
+  color: #FFFFFF;
+}
+
+.drawer-header h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.btn-drawer-close {
+  background: none;
+  border: none;
+  color: #FFFFFF;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-drawer-close:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.drawer-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.drawer-section-title {
+  font-size: 0.9rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+  margin-bottom: 0.75rem;
+}
+
+.drawer-links-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.drawer-link-item a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  color: var(--text-main);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all var(--transition-fast);
+}
+
+.drawer-link-item a:hover {
+  background: var(--nhs-blue);
+  color: #FFFFFF;
+  border-color: var(--nhs-blue);
+}
+
+.contact-card {
+  background: #EBF3FC;
+  border: 1px solid #BFDBFE;
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  color: var(--text-main);
+}
+
+[data-theme="dark"] .contact-card {
+  background: #1e293b;
+  border-color: #3b82f6;
+}
+
+.contact-card h4 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  color: var(--nhs-dark-blue);
+}
+
+[data-theme="dark"] .contact-card h4 {
+  color: #93c5fd;
+}
+
+.contact-card p {
+  font-size: 0.875rem;
+  margin-bottom: 0.75rem;
+  color: var(--text-muted);
+}
+
+.contact-card a {
+  color: var(--nhs-blue);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.contact-card a:hover {
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   ScribeHow Embedded Modal
+   ========================================================================== */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(6px);
+  z-index: 3000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--transition-normal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.modal-backdrop.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-dialog {
+  background: var(--bg-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+  width: 100%;
+  max-width: 960px;
+  height: 85vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform: scale(0.95);
+  transition: transform var(--transition-normal);
+}
+
+.modal-backdrop.open .modal-dialog {
+  transform: scale(1);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  background: var(--nhs-blue);
+  color: #FFFFFF;
+}
+
+.modal-header h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.btn-modal-close {
+  background: none;
+  border: none;
+  color: #FFFFFF;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+}
+
+.btn-modal-close:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.modal-body {
+  flex: 1;
+  background: #F8FAFC;
+  position: relative;
+}
+
+.modal-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* ==========================================================================
+   Bookmarks Drawer
+   ========================================================================== */
+.bookmarks-drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  max-width: 440px;
+  background: var(--bg-surface);
+  box-shadow: 10px 0 30px rgba(0, 0, 0, 0.25);
+  z-index: 2001;
+  transform: translateX(-100%);
+  transition: transform var(--transition-normal);
+  display: flex;
+  flex-direction: column;
+}
+
+.bookmarks-drawer.open {
+  transform: translateX(0);
+}
+
+.bookmarks-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.bookmark-item {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 0.85rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.bookmark-item-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.bookmark-item-remove {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.bookmark-item-remove:hover {
+  color: var(--nhs-emergency-red);
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.site-footer {
+  background: var(--nhs-dark-blue);
+  color: #FFFFFF;
+  padding: 3rem 0 1.5rem 0;
+  margin-top: auto;
+  border-top: 4px solid var(--nhs-yellow);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.footer-col h4 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--nhs-warm-yellow);
+}
+
+.footer-col p {
+  font-size: 0.9rem;
+  opacity: 0.9;
+  line-height: 1.6;
+}
+
+.footer-col p a,
+.footer-col a {
+  color: var(--nhs-warm-yellow);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--transition-fast), opacity var(--transition-fast);
+}
+
+.footer-col p a:hover,
+.footer-col a:hover {
+  color: #FFFFFF;
+  text-decoration: underline;
+}
+
+.footer-col p a:focus-visible,
+.footer-col a:focus-visible {
+  outline: 3px solid var(--nhs-yellow);
+  outline-offset: 2px;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-sm);
+}
+
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.footer-links a {
+  color: #FFFFFF;
+  opacity: 0.85;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: opacity var(--transition-fast);
+}
+
+.footer-links a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  padding-top: 1.5rem;
+  text-align: center;
+  font-size: 0.825rem;
+  opacity: 0.75;
+}
+
+/* Toast Notifications */
+.toast-notification {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--text-main);
+  color: var(--text-inverse);
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  font-weight: 600;
+  box-shadow: var(--shadow-lg);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transform: translateY(100px);
+  opacity: 0;
+  transition: all var(--transition-normal);
+}
+
+.toast-notification.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* ==========================================================================
+   Responsive Breakpoints
+   ========================================================================== */
+@media (max-width: 768px) {
+  .header-container {
+    flex-wrap: wrap;
+  }
+  
+  .nav-links {
+    display: none;
+  }
+
+  .courses-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .filter-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero-quick-stats {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .help-drawer, .bookmarks-drawer {
+    max-width: 100%;
+  }
+}
+
+/* Print Stylesheet */
+@media print {
+  .site-header, .hero-section, .controls-section, .btn-drawer-trigger, .site-footer, .btn-bookmark {
+    display: none !important;
+  }
+  
+  body {
+    background: #FFFFFF !important;
+    color: #000000 !important;
+  }
+  
+  .category-card {
+    border: 1px solid #CCC !important;
+    break-inside: avoid;
+    box-shadow: none !important;
+    margin-bottom: 1.5rem;
+  }
+  
+  .category-body {
+    display: block !important;
+  }
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- Accessible Skip Link -->
+  <a href="#catalogue" class="skip-link">Skip to main course catalogue</a>
+
+  <!-- ==========================================================================
+       Site Header
+       ========================================================================== -->
+  <header class="site-header" role="banner">
+    <div class="container header-container">
+      <a href="#top" class="brand-section" aria-label="NCIC Learning Management Home">
+        <div class="nhs-logo-badge">NHS</div>
+        <div class="brand-text">
+          <span class="brand-title">North Cumbria Integrated Care</span>
+          <span class="brand-sub">Learning &amp; Development Hub</span>
+        </div>
+      </a>
+
+      <nav class="nav-actions" role="navigation" aria-label="Main Navigation">
+        <ul class="nav-links">
+          <li><a href="#catalogue" class="nav-link">📚 Catalogue</a></li>
+          <li><a href="#guides" class="nav-link">📖 User Guides</a></li>
+          <li><a href="#faqs" class="nav-link">❓ FAQs</a></li>
+        </ul>
+
+        <!-- Bookmarks Trigger -->
+        <button id="btnBookmarksTrigger" class="btn-secondary" aria-label="View Saved Bookmarks"
+          title="View Saved Bookmarks">
+          <span>⭐ Bookmarks</span>
+          <span id="bookmarkBadge" class="badge" style="display:none;">0</span>
+        </button>
+
+        <!-- Help Drawer Trigger -->
+        <button id="btnHelpTrigger" class="btn-drawer-trigger" aria-label="Open Quick Help Drawer">
+          <span>☰ Quick Help</span>
+        </button>
+
+        <!-- Dark / Light Theme Toggle -->
+        <button id="themeToggleBtn" class="theme-toggle-btn" aria-label="Toggle Dark Mode" title="Toggle theme">
+          🌙
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       Hero Section with Gentle Waves
+       ========================================================================== -->
+  <section class="hero-section" id="top">
+    <div class="container hero-inner">
+      <div class="hero-pill">✨ Official NCIC Staff Resource</div>
+      <h1 class="hero-title">Learning &amp; Development Hub</h1>
+      <p class="hero-description">
+        Browse courses, access ESR direct enrolment links, view step-by-step compliance guides, and get support with
+        your training record.
+      </p>
+
+      <!-- Instant Live Search Bar -->
+      <div class="hero-search-wrapper">
+        <div class="hero-search-box">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="search" id="heroSearchInput" class="hero-search-input"
+            placeholder="Search 135+ courses, skills, topics, or delivery formats..." aria-label="Search courses"
+            autocomplete="off">
+          <button id="heroSearchClear" class="hero-search-clear" aria-label="Clear search input">✕</button>
+          <button id="heroSearchBtn" class="hero-search-btn" aria-label="Search">Find Course</button>
+        </div>
+      </div>
+
+      <!-- Quick Metrics -->
+      <div class="hero-quick-stats">
+        <div class="hero-stat-badge">
+          <span>📚 Total Courses:</span>
+          <strong id="statTotalCourses">135</strong>
+        </div>
+        <div class="hero-stat-badge">
+          <span>📂 Categories:</span>
+          <strong id="statTotalCategories">13</strong>
+        </div>
+        <div class="hero-stat-badge">
+          <span>📖 Guides &amp; FAQs:</span>
+          <strong id="statTotalGuides">14</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gentle Wave SVG Parallax (Clickable Trigger for Help Drawer) -->
+    <div class="waves-container" id="waveClickTrigger" title="Click wave banner to open quick help">
+      <svg class="wavesflex" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+        viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="wavesparallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7)" />
+          <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+          <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
+          <use xlink:href="#gentle-wave" x="48" y="7" fill="var(--bg-page)" />
+        </g>
+      </svg>
+      <div class="wave-hint">⚡ Click waves for Quick Help Drawer</div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       Controls & Filters Bar
+       ========================================================================== -->
+  <section class="controls-section" aria-label="Course Filters and Navigation">
+    <div class="container controls-wrapper">
+
+      <!-- Filter Row -->
+      <div class="filter-row">
+        <!-- Delivery Format Pills -->
+        <div class="filter-group">
+          <span class="filter-label">Format:</span>
+          <button class="filter-pill format-filter-pill active" data-format="all">
+            All Formats
+          </button>
+          <button class="filter-pill format-filter-pill" data-format="Classroom">
+            👥 Classroom
+          </button>
+          <button class="filter-pill format-filter-pill" data-format="Virtual Classroom">
+            💻 Virtual (MS Teams)
+          </button>
+          <button class="filter-pill format-filter-pill" data-format="e-Learning">
+            🖥️ e-Learning
+          </button>
+        </div>
+
+        <!-- Accordion Controls -->
+        <div class="action-buttons-group">
+          <button id="expandAllBtn" class="btn-secondary" title="Expand all categories">
+            <span>⊞ Expand All</span>
+          </button>
+          <button id="collapseAllBtn" class="btn-secondary" title="Collapse all categories">
+            <span>⊟ Collapse All</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Category Quick Jump Row -->
+      <div class="category-jump-row" id="categoryJumpContainer" aria-label="Category Quick Links">
+        <!-- Injected dynamically via JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       Main Content Container
+       ========================================================================== -->
+  <main class="container main-content" id="mainContent">
+
+    <!-- Active Filter / Search Results Bar -->
+    <div id="resultsStatusBar" class="results-status-bar" style="display:none;">
+      <div id="resultsCount" class="results-count">Showing matching courses</div>
+      <button id="resultsResetBtn" class="results-reset-btn">✕ Reset Filters</button>
+    </div>
+
+    <!-- ======================================================================
+         1. Course Catalogue Section
+         ====================================================================== -->
+    <section id="catalogue" class="content-section" aria-labelledby="catalogueHeading">
+      <div class="section-header">
+        <div>
+          <h2 id="catalogueHeading" class="section-title">
+            <span>📚</span> Course Catalogue
+          </h2>
+          <p class="section-subtitle">
+            Colour-coded by category and delivery style. Click any course to launch its enrolment directly on ESR.
+          </p>
+        </div>
+      </div>
+
+      <!-- Categories & Courses Container -->
+      <div id="categoriesContainer" class="categories-container">
+        <!-- Rendered dynamically by js/app.js from js/data.js -->
+      </div>
+
+      <!-- Empty State -->
+      <div id="emptyState" class="empty-state" style="display:none;">
+        <div class="empty-state-icon">🔍</div>
+        <h3>No courses found</h3>
+        <p>We couldn't find any courses matching your current search and format filters. Try adjusting your keywords or
+          clearing the filter.</p>
+        <button class="btn-secondary" onclick="document.getElementById('resultsResetBtn').click()">Clear All
+          Filters</button>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         2. User Guides & Compliance Help Section
+         ====================================================================== -->
+    <section id="guides" class="content-section" aria-labelledby="guidesHeading">
+      <div class="section-header">
+        <div>
+          <h2 id="guidesHeading" class="section-title">
+            <span>📖</span> ESR &amp; Compliance User Guides
+          </h2>
+          <p class="section-subtitle">
+            Step-by-step interactive walkthroughs and PDF documents to help you navigate your ESR compliance portal.
+          </p>
+        </div>
+      </div>
+
+      <!-- Guides Grid Container -->
+      <div id="guidesContainer" class="guides-grid">
+        <!-- Rendered dynamically by js/app.js from js/data.js -->
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         3. Frequently Asked Questions (FAQs) Section
+         ====================================================================== -->
+    <section id="faqs" class="content-section" aria-labelledby="faqsHeading">
+      <div class="section-header">
+        <div>
+          <h2 id="faqsHeading" class="section-title">
+            <span>❓</span> Frequently Asked Questions
+          </h2>
+          <p class="section-subtitle">
+            Answers to common questions regarding mandatory training, certification renewal, and ESR compliance.
+          </p>
+        </div>
+      </div>
+
+      <!-- FAQs Container -->
+      <div id="faqsContainer" class="faqs-container">
+        <!-- Rendered dynamically by js/app.js from js/data.js -->
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       Slide-out Help Drawer (Replaces old LifeRay Sidenav)
+       ========================================================================== -->
+  <div id="helpDrawerBackdrop" class="drawer-backdrop" aria-hidden="true"></div>
+  <aside id="helpDrawer" class="help-drawer" role="dialog" aria-labelledby="drawerTitle" aria-modal="true">
+    <div class="drawer-header">
+      <h3 id="drawerTitle">Learning &amp; Development Help</h3>
+      <button id="btnHelpClose" class="btn-drawer-close" aria-label="Close help drawer">✕</button>
+    </div>
+    <div class="drawer-body">
+
+      <!-- Quick Navigation -->
+      <div>
+        <div class="drawer-section-title">Quick Navigation</div>
+        <ul class="drawer-links-list">
+          <li class="drawer-link-item">
+            <a href="#catalogue" onclick="NCICApp.closeHelpDrawer()">
+              <span>📚 Course Catalogue</span>
+              <span>→</span>
+            </a>
+          </li>
+          <li class="drawer-link-item">
+            <a href="#guides" onclick="NCICApp.closeHelpDrawer()">
+              <span>📖 ScribeHow &amp; PDF Guides</span>
+              <span>→</span>
+            </a>
+          </li>
+          <li class="drawer-link-item">
+            <a href="#faqs" onclick="NCICApp.closeHelpDrawer()">
+              <span>❓ Compliance FAQs</span>
+              <span>→</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Essential Guides Quick Links -->
+      <div>
+        <div class="drawer-section-title">Essential User Guides</div>
+        <ul class="drawer-links-list">
+          <li class="drawer-link-item">
+            <a href="https://scribehow.com/embed/How_to_Use_the_Compliance_Portlet__9dOjYztbRxGKyPVBHEPkZg"
+              target="_blank" rel="noopener noreferrer">
+              <span>How to use My Compliance Portlet</span>
+              <span>↗</span>
+            </a>
+          </li>
+          <li class="drawer-link-item">
+            <a href="https://my.esr.nhs.uk/dashboard/webdav/cumbria-partnership-nhs-trust-262-/document_library/L%26D/HowtoUsetheCompliancePortlet.pdf"
+              target="_blank" rel="noopener noreferrer">
+              <span>Compliance Portlet (PDF Guide)</span>
+              <span>↗</span>
+            </a>
+          </li>
+          <li class="drawer-link-item">
+            <a href="https://scribehow.com/shared/How_to_Use_the_Compliance_Portlet_Copy__2Xdu0UgvQhKTuyWdU_F2lA#e8ec4826"
+              target="_blank" rel="noopener noreferrer">
+              <span>Subscribing to a Certification</span>
+              <span>↗</span>
+            </a>
+          </li>
+          <li class="drawer-link-item">
+            <a href="https://scribehow.com/shared/How_to_Use_the_Compliance_Portlet_Copy__2Xdu0UgvQhKTuyWdU_F2lA#684f48f5"
+              target="_blank" rel="noopener noreferrer">
+              <span>Playing e-Learning Courses</span>
+              <span>↗</span>
+            </a>
+          </li>
+          <li class="drawer-link-item">
+            <a href="https://scribehow.com/shared/How_to_Use_the_Compliance_Portlet_Copy__2Xdu0UgvQhKTuyWdU_F2lA#22b100c3"
+              target="_blank" rel="noopener noreferrer">
+              <span>Booking onto Classroom Training</span>
+              <span>↗</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Contact L&D Team Card -->
+      <div class="contact-card">
+        <h4>Need further assistance?</h4>
+        <p>If your training record has not updated or you have questions regarding role requirements, contact the
+          L&amp;D Team:</p>
+        <p>
+          📧 <strong>Email:</strong> <a
+            href="mailto:LearningDevelopment@ncic.nhs.uk">LearningDevelopment@ncic.nhs.uk</a>
+        </p>
+        <p style="font-size: 0.8rem; margin-top: 0.5rem; color: var(--text-muted);">
+          Please allow up to 24 hours for completed e-learning and subscriptions to reflect in your My Compliance
+          portlet.
+        </p>
+      </div>
+
+    </div>
+  </aside>
+
+  <!-- ==========================================================================
+       Slide-out Bookmarks Drawer
+       ========================================================================== -->
+  <div id="bookmarksDrawerBackdrop" class="drawer-backdrop" aria-hidden="true"></div>
+  <aside id="bookmarksDrawer" class="bookmarks-drawer" role="dialog" aria-labelledby="bookmarksTitle" aria-modal="true">
+    <div class="drawer-header" style="background: var(--nhs-blue);">
+      <h3 id="bookmarksTitle">⭐ My Saved Courses</h3>
+      <button id="btnBookmarksClose" class="btn-drawer-close" aria-label="Close bookmarks drawer">✕</button>
+    </div>
+    <div class="drawer-body">
+      <p style="font-size: 0.85rem; color: var(--text-muted);">
+        Your shortlisted courses are saved in this browser for quick reference when logging into ESR.
+      </p>
+      <ul id="bookmarksList" class="bookmarks-list">
+        <!-- Rendered dynamically -->
+      </ul>
+      <div
+        style="margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--border-light); display: flex; gap: 0.5rem;">
+        <button id="btnClearBookmarks" class="btn-secondary"
+          style="flex: 1; color: var(--nhs-emergency-red); justify-content: center;">
+          Clear All
+        </button>
+        <button class="btn-secondary" onclick="window.print()" style="flex: 1; justify-content: center;">
+          🖨️ Print List
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ==========================================================================
+       ScribeHow Interactive Preview Modal
+       ========================================================================== -->
+  <div id="guideModalBackdrop" class="modal-backdrop" aria-hidden="true">
+    <div id="guideModal" class="modal-dialog" role="dialog" aria-labelledby="guideModalTitle" aria-modal="true">
+      <div class="modal-header">
+        <h3 id="guideModalTitle">Interactive Walkthrough</h3>
+        <button id="btnGuideModalClose" class="btn-modal-close" aria-label="Close walkthrough modal">✕</button>
+      </div>
+      <div class="modal-body">
+        <iframe id="guideModalIframe" class="modal-iframe" title="ScribeHow Walkthrough Viewer" src="about:blank"
+          allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Popup -->
+  <div id="toastNotification" class="toast-notification" role="status" aria-live="polite"></div>
+
+  <!-- ==========================================================================
+       Site Footer
+       ========================================================================== -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>North Cumbria Integrated Care</h4>
+          <p>
+            NHS Foundation Trust<br>
+            Learning &amp; Organisational Development Department<br>
+            Providing workforce education, compliance training, and professional development support.
+          </p>
+        </div>
+        <div class="footer-col">
+          <h4>Useful Links</h4>
+          <ul class="footer-links">
+            <li><a href="https://my.esr.nhs.uk" target="_blank" rel="noopener noreferrer">Electronic Staff Record (My
+                ESR) ↗</a></li>
+            <li><a href="#catalogue">Browse Course Catalogue</a></li>
+            <li><a href="#guides">ESR Compliance Guides</a></li>
+            <li><a href="#faqs">Training &amp; Compliance FAQs</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Need Support?</h4>
+          <p>
+            For training queries, booking issues, or certification status assistance:<br>
+            📧 <a href="mailto:LearningDevelopment@ncic.nhs.uk">LearningDevelopment@ncic.nhs.uk</a>
+          </p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 North Cumbria Integrated Care NHS Foundation Trust. Learning Management Hub.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+/**
+ * NCIC Learning & Development Hub - Central Data Store
+ * ===================================================
+ * To update, add or remove courses, categories, FAQs or guides,
+ * simply edit the arrays below. No HTML or CSS changes required!
+ */
+
+const APP_CONFIG = {
+  trustName: 'North Cumbria Integrated Care NHS Foundation Trust',
+  shortName: 'NCIC',
+  hubTitle: 'Learning & Development Hub',
+  hubSubtitle: 'Course Catalogue, Compliance Guidance & ESR Booking Portal',
+  supportEmail: 'LearningDevelopment@ncic.nhs.uk',
+  lastUpdated: 'August 2026',
+  version: '2.0.0'
+};
+
+const GUIDES_DATA = [
+  {
+    "title": "How to use the My Compliance Portlet",
+    "url": "https://scribehow.com/embed/How_to_Use_the_Compliance_Portlet__9dOjYztbRxGKyPVBHEPkZg",
+    "type": "scribe"
+  },
+  {
+    "title": "PDF",
+    "url": "https://my.esr.nhs.uk/dashboard/webdav/cumbria-partnership-nhs-trust-262-/document_library/L%26D/HowtoUsetheCompliancePortlet.pdf",
+    "type": "pdf"
+  },
+  {
+    "title": "Identifying Training that is Outstanding",
+    "url": "https://scribehow.com/shared/How_to_Use_the_Compliance_Portlet_Copy__2Xdu0UgvQhKTuyWdU_F2lA#8eb876c4",
+    "type": "scribe"
+  },
+  {
+    "title": "Subscribing to a Certification",
+    "url": "https://scribehow.com/shared/How_to_Use_the_Compliance_Portlet_Copy__2Xdu0UgvQhKTuyWdU_F2lA#e8ec4826",
+    "type": "scribe"
+  },
+  {
+    "title": "Playing e-Learning Courses you are Enrolled On",
+    "url": "https://scribehow.com/shared/How_to_Use_the_Compliance_Portlet_Copy__2Xdu0UgvQhKTuyWdU_F2lA#684f48f5",
+    "type": "scribe"
+  },
+  {
+    "title": "Booking onto Classroom Training",
+    "url": "https://scribehow.com/shared/How_to_Use_the_Compliance_Portlet_Copy__2Xdu0UgvQhKTuyWdU_F2lA#22b100c3",
+    "type": "scribe"
+  },
+  {
+    "title": "Viewing Details of Classes you are Booked On",
+    "url": "https://scribehow.com/shared/How_to_Use_the_Compliance_Portlet_Copy__2Xdu0UgvQhKTuyWdU_F2lA#e023d1a4",
+    "type": "scribe"
+  }
+];
+
+const FAQS_DATA = [
+  {
+    "question": "I have completed\n                                                some training and my Compliance has not updated, what can I do?",
+    "answer": "<p>\n                                                To ensure your training has been completed correctly, please check the\n                                                following.\n                                            </p>\n<ol>\n<li data-list-item-id=\"e6c9b7d9288e1e34401c42b738081e276\">\n                                                    Using the My Compliance portlet, check you are subscribed or\n                                                    renewing a certification. If not subscribe to the certification and\n                                                    allow 24 hours for your record to be updated.\n                                                </li>\n<li data-list-item-id=\"ed0a8b88037ca07c59ae5743d5f55e5b2\">\n                                                    On your learner home page, under e-learning enrolments check the\n                                                    status of the enrolment. If this is showing as incomplete, click the\n                                                    play button and complete the training, ensuring you click on the\n                                                    house to save your progress.\n                                                </li>\n</ol>\n<p>\n                                                If neither of these resolves the issue, please contact the Training\n                                                Team.\n                                            </p>\n<p>\n                                                \u00a0\n                                            </p>"
+  },
+  {
+    "question": "What do I do if I\n                                                believe the My Compliance portlet is showing the incorrect subjects for\n                                                my role, including subjects that are missing.",
+    "answer": "<p>\n                                                Discuss this with your manager and, if they agree that the subjects\n                                                should be changed, ask them to contact the Learning and Development team\n                                                indicating which subjects should be changed and why - this will then be\n                                                reviewed in conjunction with Subject Matter Experts and a decision made.\n                                            </p>"
+  },
+  {
+    "question": "How do I review all\n                                                the training required for my job?",
+    "answer": "<p>\n                                                Expand the Compliance Portlet and click on View My Compliance button.\n                                            </p>\n<p>\n                                                Subjects that are required will show as red, amber or green. Blue\n                                                competencies are additional training that you have completed but are not\n                                                currently required for your role.\n                                            </p>"
+  },
+  {
+    "question": "Is mandatory\n                                                training that is completed in another organisation recognised by\n                                                NCIC?",
+    "answer": "<p>\n                                                Training completed in other NHS organisations is automatically\n                                                transferred via ESR. For training that is not, please contact the\n                                                Learning and Development team with evidence of the training you want\n                                                recognised.\n                                            </p>"
+  },
+  {
+    "question": "Can I complete\n                                                training whilst I am an applicant?",
+    "answer": "<p>\n                                                You can use the My Compliance portlet to complete e-learning prior to\n                                                your start date if you wish.\n                                            </p>\n<p>\n                                                Face to face or virtual classes should not be booked until you have\n                                                started in post.\n                                            </p>"
+  },
+  {
+    "question": "What do I do if my\n                                                certification subscription status is \"expired\"?",
+    "answer": "<p>\n                                                Contact the Learning and Development team.\n                                            </p>"
+  },
+  {
+    "question": "What do I do if the\n                                                play button in the my learner home page is greyed out?",
+    "answer": "<p>\n                                                To resolve this access the learning via the My Compliance portlet.\n                                            </p>"
+  }
+];
+
+const CATEGORIES_DATA = [
+  {
+    "name": "Clinical\n                                                Skills",
+    "color": "#2F5597",
+    "courses": [
+      {
+        "title": "262 Blood Glucose Monitoring and Delegated Administration\n                                                of Insulin",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=diGdmuTywMCUuZ-jihMS7w..&params=NChLaOkwtQDE-OipdiOGoYVvGXdP4he7xrt5alke8tDjqmc8GjONz5gXLyN7DUgptax8Rco9sNU9t8L0CNyxAA",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-1-1"
+      },
+      {
+        "title": "262 Blood Glucose Monitoring and Delegated Administration\n                                                of Insulin (Delivered via Teams)",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=upsauiyX_BkvAuLuDIYihw..&params=ZKWgMUgpjlmtbmHXQuCiUnTrcLEwYlwuhLkXZfPtcWnjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-1-2"
+      },
+      {
+        "title": "262 Blood Transfusion Training",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=QF7NTUsQpDAAge0q43H2kA..&params=6VTdvBvbCIG8KxeugqYf1ZLDIbiZodXp1P8Qt9rKh4Tjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-1-3"
+      },
+      {
+        "title": "262 Catheterisation",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=bEvSgwGkauPEa_QcB9b5ew..&params=9EmF21XqoQrLyKhn5WTytFvf-HDkZyUeTtY0hzSOuMvjqmc8GjONz5gXLyN7DUgptax8Rco9sNU9t8L0CNyxAA",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-1-4"
+      },
+      {
+        "title": "262 Catheterisation (Delivered via Teams)",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=upsauiyX_BkvAuLuDIYihw..&params=LiBbjEeeAmgupF54jpMh9I53P-IGsSVvPiKYo1SAIR7jqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-1-5"
+      },
+      {
+        "title": "262 Clinical Skills - Sign Off Session",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=diGdmuTywMCUuZ-jihMS7w..&params=EA5qca0DYZFWoYIKIVDiNK9mVm8WW6hzqPh6sKdicuHjqmc8GjONz5gXLyN7DUgptax8Rco9sNU9t8L0CNyxAA",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-1-6"
+      },
+      {
+        "title": "262 Venepuncture & Cannulation: Sign Off Session",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&params=irGHWdDnVIQnQJGepMHJsqW3YOCoGkzAQFdIpGnmmpDjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-1-7"
+      },
+      {
+        "title": "262 VoED/Syringe Driver/CVAD: Sign Off Session",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=1&security_group_id=0&lang_code=US&params=NoM3y3lGH.dXN4jLJz4KsyXWN7RCfRgxtDrMbwdsVwbjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-1-8"
+      },
+      {
+        "title": "262 Nasogastric & PEG Tubes: Sign Off Session",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&params=79NqGsAQiqtq5rMai-Y3q54kCHxYIOwlZNYUGEFc6.zjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-1-9"
+      },
+      {
+        "title": "262 Catheterisation: Sign Off Session",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&params=gEU1KHTaAakwX2Gq-YRNYR9D.1LFTGKjgTdMu7cELEfjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-1-10"
+      },
+      {
+        "title": "262 ECG Recording",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=diGdmuTywMCUuZ-jihMS7w..&params=PoOFQu06a3ajnp-JhTeBgNQo6Cy9Wlz-X5xC13e1KMPjqmc8GjONz5gXLyN7DUgptax8Rco9sNU9t8L0CNyxAA",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-1-11"
+      },
+      {
+        "title": "262 ECG Recording (Delivered via Teams)",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=upsauiyX_BkvAuLuDIYihw..&params=FeYTxbLx3mq58MXThsflLDrMILWKeJ-lq7xw2BACHtXjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-1-12"
+      },
+      {
+        "title": "262 Management of Central Venous Devices",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=diGdmuTywMCUuZ-jihMS7w..&params=hMF77N2wDAVK-N-zezp3HZ6GOdgJJiqWSpjbRelxt.Ljqmc8GjONz5gXLyN7DUgptax8Rco9sNU9t8L0CNyxAA",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-1-13"
+      },
+      {
+        "title": "262 Management of Central Venous Devices (Delivered via\n                                                Teams)",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=upsauiyX_BkvAuLuDIYihw..&params=WXnw-FNQ2EYfBaAkOM8FCudrr3mCZrqPuqM12lEHdzPjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-1-14"
+      },
+      {
+        "title": "262 MELISSA Bus Clinical Skills Carousel and Care\n                                                Certificate Support: Drop-in",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=diGdmuTywMCUuZ-jihMS7w..&params=o3rQdvUJ5o4toTFC4j5UDZNWIoxwuGT-eUUdupiNDrXjqmc8GjONz5gXLyN7DUgptax8Rco9sNU9t8L0CNyxAA",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-1-15"
+      },
+      {
+        "title": "262 Moving and Handling Level 2 - Patient Handling",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=4gamJ1no_glK-rllea_79w..&params=dYr947Sm93304baoGKV6th3AIYaasy8eauRRGJVBwEfjqmc8GjONz5gXLyN7DUgptax8Rco9sNU9t8L0CNyxAA",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-1-16"
+      },
+      {
+        "title": "262 Nasogastric Tubes",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=bEvSgwGkauPEa_QcB9b5ew..&params=s5Y2qSR9CFzNabXMzsGCnvdN6LxkZXBCLhXijUZDG9vjqmc8GjONz5gXLyN7DUgptax8Rco9sNU9t8L0CNyxAA",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-1-17"
+      },
+      {
+        "title": "262 Nasogastric Tubes (Delivered via Teams)",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=upsauiyX_BkvAuLuDIYihw..&params=JFpibcjZJmQ9cXn6o1feLcnDMy7I.AXBXCt7zTSV7iLjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-1-18"
+      },
+      {
+        "title": "262 Physiological Observations and NEWS2",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=diGdmuTywMCUuZ-jihMS7w..&params=hT.6qw5Hr2R5aZkVEulImwz5FI7LC.8AIOLjErngcJbjqmc8GjONz5gXLyN7DUgptax8Rco9sNU9t8L0CNyxAA",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-1-19"
+      },
+      {
+        "title": "262 Physiological Observations and NEWS2 (Delivered via\n                                                Teams)",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=upsauiyX_BkvAuLuDIYihw..&params=CuPudzZQgDI4r.1QorGgnuZ6vsd-hmkyzI7BrGYgP.vjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-1-20"
+      },
+      {
+        "title": "262 Respiratory Examination Simulation-Based Education",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=diGdmuTywMCUuZ-jihMS7w..&params=Kxi2anp9GEA7sS5Ul.GgfTe2BMhufWhMML6JQYGjGTPjqmc8GjONz5gXLyN7DUgptax8Rco9sNU9t8L0CNyxAA",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-1-21"
+      },
+      {
+        "title": "262 SAGE & THYME Foundation Level Workshop",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=diGdmuTywMCUuZ-jihMS7w..&params=YgjnK22jAHKH6PzIbmGCPwpjZ836PsAHdo5yqCZeDlPjqmc8GjONz5gXLyN7DUgptax8Rco9sNU9t8L0CNyxAA",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-1-22"
+      },
+      {
+        "title": "262 Venepuncture Full Training",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=Mf_jQEjjt_jqVoQXodwB6Q..&params=LAj6l4wS8IusWznj2NeVBsSlSzTTK-TidwYD6yscxh-jqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c\n                                            ",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-1-23"
+      },
+      {
+        "title": "262 Venepuncture - Refresher",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=TJnuQYMNrUwDGO4e0p6UzQ..&params=6jsxiq8s.wkQZ42b247X.gBLFLGX-Vz7z5SiMcVyg9rjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-1-24"
+      },
+      {
+        "title": "262 Venepuncture - Refresher (Delivered via Teams)",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=TJnuQYMNrUwDGO4e0p6UzQ..&params=yVK-WgBzepP8Lc6fitMzXkOSQWaiu8IDndMrenE-tPvjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-1-25"
+      },
+      {
+        "title": "262 Cannulation Full Training",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=Mf_jQEjjt_jqVoQXodwB6Q..&params=eL4FQPlEnWzmpUW0xKuAy.jKAx5XIoJlQdSXze5eiiXjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c\n                                            ",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-1-26"
+      },
+      {
+        "title": "262 Cannulation - Refresher",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=TZ7zzTsrNSJ35bGHlQenKA..&params=7wt4AzDP.JyLZWuZGcWXqmhi7VrD6z68I2V4J106BkHjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c\n                                            ",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-1-27"
+      },
+      {
+        "title": "262 Cannulation - Refresher (Delivered via Teams)",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=Mf_jQEjjt_jqVoQXodwB6Q..&params=fjbXygk.zSpYnUnUCEu4J2zMfc-oCaH2uLhiKlJIeSfjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c\n                                            ",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-1-28"
+      },
+      {
+        "title": "262 Gastronomy (PEG) Tube Ongoing Care and Feeding",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=kwRhF1v6cEdGwmaUt0Oclw..&params=6KqKA6OmkzgihcLLfykYjpr92ErimPQR0rn8YAdSe-Xjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c\n                                            ",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-1-29"
+      },
+      {
+        "title": "262 Gastronomy (PEG) Tube Ongoing Care and Feeding\n                                                (Refresher)",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=kwRhF1v6cEdGwmaUt0Oclw..&params=PAyGDcN4FENeMo3yA1a38.-hoRUYv7efB3FhLV65GCrjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c\n                                            ",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-1-30"
+      },
+      {
+        "title": "262 Verification of Expected Death and Tissue Donation",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=bEvSgwGkauPEa_QcB9b5ew..&params=Q5qcnuabtLOi3xm8PIc0qi6qJngt13ZZyo14YO5Qj7rjqmc8GjONz5gXLyN7DUgptax8Rco9sNU9t8L0CNyxAA",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-1-31"
+      },
+      {
+        "title": "262 Verification of Expected Death and Tissue Donation\n                                                (Delivered via Teams)",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=upsauiyX_BkvAuLuDIYihw..&params=bp3cobTfucYiRpw9Zulxf0qx7nTbycWFKNZrMLgV9M7jqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-1-32"
+      },
+      {
+        "title": "262 Let's Talk Bereavement",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=XxCnGtQvmgHopbhvaNneUA..&params=mBtI.tDcpQ6f42K5F8tZaQUN--LCDyY03TmBGgjnpk-jqmc8GjONz5gXLyN7DUgptax8Rco9sNU9t8L0CNyxAA",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-1-33"
+      },
+      {
+        "title": "262 Let's Talk Bereavement - Anticipatory Grief in\n                                                Adults",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=XxCnGtQvmgHopbhvaNneUA..&params=GeOy8R.euKh2d4VIBqnzhpZaH4o7a-lghAGrdvzGGL3jqmc8GjONz5gXLyN7DUgptax8Rco9sNU9t8L0CNyxAA",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-1-34"
+      },
+      {
+        "title": "262 Mouth Care Matters - All Staff",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=Ry70iVCjF1MX0milezf3Yg..&params=ZQwDF-oVmF4fy0LlCbvt3vSDym78oBjhCXG4jWsxjJ7jqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-1-35"
+      },
+      {
+        "title": "262 Mouth Care Matters for Medical Staff",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=Ry70iVCjF1MX0milezf3Yg..&params=NRX-CkVA1-Hfr.q0mpJSR.ieaHtwmfX5JIQF.sWSrWTjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-1-36"
+      },
+      {
+        "title": "262 MUST (Malnutrition Universal Screening Tool)",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=m0bu-ZDgE2Gu79PVS4EmDA..&params=cRWxrOxyI8HL6Pr3Tm8dwSC8kUls3mysIqrg2vs62prjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-1-37"
+      },
+      {
+        "title": "262 MUST (Malnutrition Universal Screening Tool)\n                                                (Delivered via Teams)",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=m0bu-ZDgE2Gu79PVS4EmDA..&params=KGFjRzPQe7gbXsauaOyfVFn0MrDTQpnkpAtDhR0l7Rvjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-1-38"
+      },
+      {
+        "title": "262\n                                                Medical Gas Training for DMO/DNO's",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=vC20vNfJu3473DqTyC7y4Q..&params=Kb-Eiuhp7fwTcIlAnV2koskPWIGHDfVqB9dGFa4KdtXjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-1-39"
+      },
+      {
+        "title": "262 In House PMVA 1 Day Training",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=hIlrTK9WSE2BlExGlhWrDQ..&params=2Ti8AiM.Q-QP5ZUql3jjUgXft-4lckhjeepa7HO1xkTjqmc8GjONz5gXLyN7DUgptax8Rco9sNU9t8L0CNyxAA",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-1-40"
+      },
+      {
+        "title": "262 PMVA 1 Day Lone Worker",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=XSW7U_q66V4zTYIsezWg6w..&params=v9FA5kDNzzkJ7pOjkAoFAoKVD7cFKJfGSRl1OGmvMOzjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c\n                                            ",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-1-41"
+      },
+      {
+        "title": "262 PMVA 3 Day Course",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=dIL8QqEfsUaExyq6Kjg7tg..&params=.3N5bdLKNxGRo75TPzEoEhb-iqQG1hO1zYLRWbfl8Drjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c\n                                            ",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-1-42"
+      }
+    ],
+    "id": "cat-1",
+    "icon": "book-open"
+  },
+  {
+    "name": "Equality, Diversity\n                                                and Inclusion",
+    "color": "#D5759E",
+    "courses": [
+      {
+        "title": "262 Understanding Gender, Sex and Relationship Diversity\n                                                Level 2",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=1VyCHtwUaxwk0Ygt_4newA..&params=iEm5MChKzorceQfRPfgv4LNMkBMqWAVSqr6gDBXkqmnjqmc8GjONz5gXLyN7DUgptax8Rco9sNU9t8L0CNyxAA",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-2-1"
+      },
+      {
+        "title": "262 Working with Gender, Sex and Relationship Diversity\n                                                Level 3",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=1VyCHtwUaxwk0Ygt_4newA..&params=aykTKK.3BjNbg1myfVbGSTnjRHIweFcZxqg0NzasQmfjqmc8GjONz5gXLyN7DUgptax8Rco9sNU9t8L0CNyxAA",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-2-2"
+      },
+      {
+        "title": "262 Workplace Adjustments Training",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=1VyCHtwUaxwk0Ygt_4newA..&params=5KhYDstH2jBgt99f8B7YncQoNDXU3QpcPSznQP-..-Tjqmc8GjONz5gXLyN7DUgptax8Rco9sNU9t8L0CNyxAA",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-2-3"
+      },
+      {
+        "title": "262 How to be an Effective Ally",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=EZEziv0BUW3PbIwiGlWnZw..&params=p0ZWVwxCfAbjN-Q18oejUKbnxgNiu0DnzKTQ.ViA8sbjqmc8GjONz5gXLyN7DUgptax8Rco9sNU9t8L0CNyxAA",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-2-4"
+      },
+      {
+        "title": "262 Deaf Awareness Training",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=EZEziv0BUW3PbIwiGlWnZw..&params=TViYpo0rrQG75sqXM0UOTprgYrepWpBHxAgtfi7YDUHjqmc8GjONz5gXLyN7DUgptax8Rco9sNU9t8L0CNyxAA",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-2-5"
+      },
+      {
+        "title": "262 Cultural Awareness Training for Managers (Show Racism\n                                                the Red Card)",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&params=dna1nPoGmU-SjmFaIsmScnYLLXrno0gINImuOn6IQT-jqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-2-6"
+      },
+      {
+        "title": "262 Cultural Awareness Training for Colleagues (Show\n                                                Racism the Red Card)",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&params=CQVRnPLDgHcgqoQFnIlsa038c3NjgzQIs1YEQLuh1LLjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-2-7"
+      },
+      {
+        "title": "262 Neurodiversity Awareness",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&params=lHSku8xkavb8aoTomx0d19YzThKMh1fSY.e6T4VgxA-jqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-2-8"
+      }
+    ],
+    "id": "cat-2",
+    "icon": "book-open"
+  },
+  {
+    "name": "Health and\n                                                Safety",
+    "color": "#92D050",
+    "courses": [
+      {
+        "title": "262 COSHH Training",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=q2MJD0lrDbHnsVV0hQNmQQ..&params=D2POcKxxGqjgIG0MnGffTkR5z9VWq9tbdnOnXwz6N3Pjqmc8GjONz5gXLyN7DUgptax8Rco9sNU9t8L0CNyxAA",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-3-1"
+      },
+      {
+        "title": "262 IOSH Managing Safely",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=q2MJD0lrDbHnsVV0hQNmQQ..&params=qqhqxlHyQ2nTGdZ7hfQYU.HYSY06M-.ipVxRMikuKw-jqmc8GjONz5gXLyN7DUgptax8Rco9sNU9t8L0CNyxAA",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-3-2"
+      }
+    ],
+    "id": "cat-3",
+    "icon": "book-open"
+  },
+  {
+    "name": "People Management\n                                                Courses",
+    "color": "#FFC000",
+    "courses": [
+      {
+        "title": "262 People Management Programme - Developing My Team",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=-H-ydgj5fp5e5uUAXNh_xQ..&params=RMKJPvZ.Ql3eUD00gyZ5jzn8Up1AEwr9kmFBisTwPP3jqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-4-1"
+      },
+      {
+        "title": "262 People Management Programme - Enabling My Team To\n                                                Thrive",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=-H-ydgj5fp5e5uUAXNh_xQ..&params=uJiplABQtxdnzjPW1q8g3G4bfDLxBQHG1ntQeNln2OTjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-4-2"
+      },
+      {
+        "title": "262 People Management Programme - Ensuring a positive\n                                                journey for my team",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=-H-ydgj5fp5e5uUAXNh_xQ..&params=xWq7hFbNn1C9rq.vMSvpAAFGF-Ml5xjC1lVSD4dTqrPjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-4-3"
+      },
+      {
+        "title": "262 People Management Programme - Organisational Culture\n                                                and Context",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=-H-ydgj5fp5e5uUAXNh_xQ..&params=yf1S7NSI5cK.MdukFEyk740jZQBQAeu5w9D9TrbJsw3jqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-4-4"
+      },
+      {
+        "title": "262 Managing Difficult and Challenging Conversations",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&params=7PJcI8w2ZIlKGEgo2fZDpKsYnXmUMXXnEhastzZUUq-jqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-4-5"
+      },
+      {
+        "title": "262 Dealing with Conduct and Capability Matters",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&params=5.gru2HxMrJ-CKplM1JqJv78jb9o4A9Xf6da86zMSeXjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-4-6"
+      },
+      {
+        "title": "262 NCIC Coaching Skills",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=gUDZ48NQstEurBn77KgtKA..&params=KU4IPaTZe4mQWgM5L.xaVtUtn-md5eqdMNe9sn-UEVPjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-4-7"
+      },
+      {
+        "title": "262 Facilitations Skills",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=tGz4uQVINR8tGSmKTt4cfA..&params=eqGgQX32KSu2yiseMN748OkbeuzAJEIepdgl-f0Nbnnjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-4-8"
+      },
+      {
+        "title": "262 Resolving Workplace Conflict",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&params=b21WECoFnqyaQEDiB3PleHpEOkejth5TGnyj0dpb1Hvjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-4-9"
+      },
+      {
+        "title": "262 Attendance Management",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=4gamJ1no_glK-rllea_79w..&params=aZ6398Agm1pZmv2MvD1Mp9491RlMGvRyTFdyk5YtedXjqmc8GjONz5gXLyN7DUgptax8Rco9sNU9t8L0CNyxAA",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-4-10"
+      },
+      {
+        "title": "262 Flexible Working Training",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=4gamJ1no_glK-rllea_79w..&params=G7O7DN0LUk2pgzlwJd4QvIdKOO6F8B3JL0KU9WzIiPDjqmc8GjONz5gXLyN7DUgptax8Rco9sNU9t8L0CNyxAA",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-4-11"
+      },
+      {
+        "title": "262 Having Meaningful Conversations (Linked to Appraisal\n                                                Policy)",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=4gamJ1no_glK-rllea_79w..&params=EucWRmHN5McrNVmRFa5oyiN6fEF-lcoz1YA6qVHlPm3jqmc8GjONz5gXLyN7DUgptax8Rco9sNU9t8L0CNyxAA",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-4-12"
+      },
+      {
+        "title": "262 Having Meaningful Conversations (Linked to Appraisal\n                                                Policy) Face to Face",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=sTkPMjDDdh69_F6cPuZ0Eg..&params=LWmrBB88dMySEq6cOsF6HDEQMnOl-gPQarUJOruGi1Xjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c\n                                            ",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-4-13"
+      },
+      {
+        "title": "262 Valuable Appraisal for Appraisees",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&params=P6lja.VKGP5U69UkZ7E35-Rp5o4SBFM2dXwQW0Rf7D-jqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-4-14"
+      },
+      {
+        "title": "262 Valuable Appraisal for Appraisees Face to Face",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&params=sMDFBMZKtbr46UeFoKwn.38AWK3BHrwfn8RjVJcnOPTjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-4-15"
+      }
+    ],
+    "id": "cat-4",
+    "icon": "book-open"
+  },
+  {
+    "name": "Learning and\n                                                Development",
+    "color": "#00B0F0",
+    "courses": [
+      {
+        "title": "262 Having Meaningful Conversations (Linked to Appraisal\n                                                Policy)",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=4gamJ1no_glK-rllea_79w..&params=EucWRmHN5McrNVmRFa5oyiN6fEF-lcoz1YA6qVHlPm3jqmc8GjONz5gXLyN7DUgptax8Rco9sNU9t8L0CNyxAA",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-5-1"
+      },
+      {
+        "title": "262 Having Meaningful Conversations (Linked to Appraisal\n                                                Policy) Face to Face",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=sTkPMjDDdh69_F6cPuZ0Eg..&params=LWmrBB88dMySEq6cOsF6HDEQMnOl-gPQarUJOruGi1Xjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c\n                                            ",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-5-2"
+      },
+      {
+        "title": "262 Valuable Appraisal for Appraisees",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&params=P6lja.VKGP5U69UkZ7E35-Rp5o4SBFM2dXwQW0Rf7D-jqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-5-3"
+      },
+      {
+        "title": "262 Valuable Appraisal for Appraisees Face to Face",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&params=sMDFBMZKtbr46UeFoKwn.38AWK3BHrwfn8RjVJcnOPTjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-5-4"
+      },
+      {
+        "title": "262 Learning Champions",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=1VyCHtwUaxwk0Ygt_4newA..&params=1lzoCpS2gZqHzrV2W1TJqcU4bmN9DOmSyYyR3y90tr3jqmc8GjONz5gXLyN7DUgptax8Rco9sNU9t8L0CNyxAA",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-5-5"
+      },
+      {
+        "title": "262 Learning Champions Face to Face",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=VSp8cgmYcALh62XeuB0U_g..&params=j8OLkYLDQYl8bcMCM7Vu2.G4PBhIfmAMQYNmd9QDFsfjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c\n                                            ",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-5-6"
+      },
+      {
+        "title": "262 Facilitations Skills",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=tGz4uQVINR8tGSmKTt4cfA..&params=eqGgQX32KSu2yiseMN748OkbeuzAJEIepdgl-f0Nbnnjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-5-7"
+      },
+      {
+        "title": "262 Research and Digital Learning Skills to support\n                                                Leadership Practice",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=1VyCHtwUaxwk0Ygt_4newA..&params=.mqiqb.FG27LEaf05hkl0cNVEoNx83iUsuHLiFGViFjjqmc8GjONz5gXLyN7DUgptax8Rco9sNU9t8L0CNyxAA",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-5-8"
+      },
+      {
+        "title": "262 Functional Skills Inductions",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=1LCqqYdmhht7-t1zHRVQ-w..&params=NmFjgE0y-VhSDaepXsv9pkPke8cpbweCJlp-ai.oOtLjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c\n                                            ",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-5-9"
+      },
+      {
+        "title": "262 Functional Skills Support Sessions",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=1LCqqYdmhht7-t1zHRVQ-w..&params=vJPcmmNKepKoC2qLPul-fMsUiz7oTK-2qnZAekZxmBLjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c\n                                            ",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-5-10"
+      },
+      {
+        "title": "262 Apprenticeship Development Event",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=3oPW6tVM1Wa34cZ_Eq-_Dg..&params=7rw.9JKfnnzb6j6KzyIBiRyEWVbsgfPpflxT0i9ymavjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-5-11"
+      },
+      {
+        "title": "262 NCIC Coaching Skills",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=gUDZ48NQstEurBn77KgtKA..&params=KU4IPaTZe4mQWgM5L.xaVtUtn-md5eqdMNe9sn-UEVPjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c\n                                            ",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-5-12"
+      },
+      {
+        "title": "262 Working Together Effectively",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&params=p-NxT0XwsYmSUsXEye1vK33HiZDyGbmDdA-UnSJK1tTjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-5-13"
+      },
+      {
+        "title": "262 Confident Applications & Interview Skills",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&params=vHq.uyQHlr6gnKeNmSPuuh8wKgGsaKMsUH.N3SJKcADjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-5-14"
+      },
+      {
+        "title": "262 Efficient Time Management",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&params=RfKaTd9nLDQPskQuMDR.ROSwhIG6SbWX6k7mR-qN7CXjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-5-15"
+      },
+      {
+        "title": "262 Impactful Presentation Skills",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&params=MABE7Iy5Gobnc2GBDrs0KUcKnTG-vovE.zUKOO1NrDvjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-5-16"
+      }
+    ],
+    "id": "cat-5",
+    "icon": "book-open"
+  },
+  {
+    "name": "Leadership\n                                                3,2,1",
+    "color": "#2F5597",
+    "courses": [
+      {
+        "title": "262 Leadership 1",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&params=UiUVRV0.183STZHZGVE04K78ygU.W9vEFSWbXchtYhTjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-6-1"
+      },
+      {
+        "title": "262 Leadership 2",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&params=bGtmZ78UVAVX8pdov5aEKga-hHDFNcP5R9dYh74f8Jvjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-6-2"
+      },
+      {
+        "title": "262 Leadership 3",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&params=oNH4awh4rvs0UHYc7oJUCVd8-43DyGMmv4hWWr6FoQnjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-6-3"
+      }
+    ],
+    "id": "cat-6",
+    "icon": "book-open"
+  },
+  {
+    "name": "Moving and\n                                                Handling",
+    "color": "#ED7D31",
+    "courses": [
+      {
+        "title": "262 Moving and Handling Level 2 - Patient Handling",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=4gamJ1no_glK-rllea_79w..&params=dYr947Sm93304baoGKV6th3AIYaasy8eauRRGJVBwEfjqmc8GjONz5gXLyN7DUgptax8Rco9sNU9t8L0CNyxAA",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-7-1"
+      },
+      {
+        "title": "262 Moving and Handling Plus-Size Awareness Training",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&params=rSRKcX4SOE9EIdPWFEa8Yu18XABsQuebqwxn3-i3gRzjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-7-2"
+      }
+    ],
+    "id": "cat-7",
+    "icon": "book-open"
+  },
+  {
+    "name": "Preceptorship",
+    "color": "#A5A5A5",
+    "courses": [
+      {
+        "title": "262 Preceptor Training",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=KaO3rBhusr8gJbe-TNpyZw..&params=-mI9BD6aNXPrg3xm1fQExkARbTePq5biUnYIXqTufMHjqmc8GjONz5gXLyN7DUgptax8Rco9sNU9t8L0CNyxAA",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-8-1"
+      }
+    ],
+    "id": "cat-8",
+    "icon": "compass"
+  },
+  {
+    "name": "Safeguarding",
+    "color": "#00B050",
+    "courses": [
+      {
+        "title": "262 MCA DoLS & Best Interest (via MS Teams)",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&params=B.GVd8n1BQsl.JNtNUICGS2GPhsXWa.ZHf5TLftQL8fjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-9-1"
+      },
+      {
+        "title": "262 MCA DoLS & Best Interest",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&params=qeBsrgd.bTnc7qhC.Hf24Ax3d82fmXG.J6W5LN7VXHrjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-9-2"
+      },
+      {
+        "title": "262 Mental Capacity Assessment 16 and 17 Year Old\n                                                Training",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=x8QMiPdQmihQbUiWUg3EFQ..&params=Bl5iceIjumiM-TOCHcE.ahTGqtq4P5u-eGYWGsIRqcXjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c ",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-9-3"
+      },
+      {
+        "title": "262 Safeguarding Adults Level 3",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=4gamJ1no_glK-rllea_79w..&params=n5UWoki3gRFgbsLWObm80FTfNeNbdRgPiX5IvEzm-eLjqmc8GjONz5gXLyN7DUgptax8Rco9sNU9t8L0CNyxAA",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-9-4"
+      },
+      {
+        "title": "262 Safeguarding Children Level 3",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=4gamJ1no_glK-rllea_79w..&params=YkKXg2PQx1mD1aq6w-EPdmZ4BoKQXCDKnoZeS6W1IKTjqmc8GjONz5gXLyN7DUgptax8Rco9sNU9t8L0CNyxAA",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-9-5"
+      },
+      {
+        "title": "262 Safeguarding Children Supervision - Child Exploitation",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=X_RLI6wvcotFn940RlwOhg..&params=78Bb7sF.fWaMKvisi1mgqKbYznYybArMLYc2.WGAEwPjqmc8GjONz5gXLyN7DUgptax8Rco9sNU9t8L0CNyxAA",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-9-6"
+      },
+      {
+        "title": "262 Safeguarding Children Supervision - Child Neglect",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=X_RLI6wvcotFn940RlwOhg..&params=s3KvC.tz2Kmlke8hiZ0-KGKDCinCt5mwaS1OgS335QDjqmc8GjONz5gXLyN7DUgptax8Rco9sNU9t8L0CNyxAA",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-9-7"
+      },
+      {
+        "title": "262 Safeguarding Children Supervision - CSPRs",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=XxCnGtQvmgHopbhvaNneUA..&params=O0ucumWOtLMOImXvlcEZ13xkBSa9mWZyRi9dglMLU7Hjqmc8GjONz5gXLyN7DUgptax8Rco9sNU9t8L0CNyxAA",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-9-8"
+      },
+      {
+        "title": "262 Safeguarding Children Supervision - Information Sharing\n                                                and Confidentiality",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=XxCnGtQvmgHopbhvaNneUA..&params=KriuAApNP0YdevkEMKAAS0iekM5E7jumZv3-osFcN7Hjqmc8GjONz5gXLyN7DUgptax8Rco9sNU9t8L0CNyxAA\n                                            ",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-9-9"
+      },
+      {
+        "title": "262 Safeguarding Children Supervision - Parental Mental\n                                                Health",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=XxCnGtQvmgHopbhvaNneUA..&params=9ekV-HssoFBQJC-S6txhC1-ps53ilDcZHw3td8GSK3zjqmc8GjONz5gXLyN7DUgptax8Rco9sNU9t8L0CNyxAA",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-9-10"
+      },
+      {
+        "title": "262 Safeguarding Children Supervision - Voice of the\n                                                Child",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=XxCnGtQvmgHopbhvaNneUA..&params=HU1GA3jmt84VKhnE.A1nzT0bP66BGklUpqTj5WmwAEzjqmc8GjONz5gXLyN7DUgptax8Rco9sNU9t8L0CNyxAA\n                                            ",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-9-11"
+      },
+      {
+        "title": "262 Safeguarding Children Supervision - Child and\n                                                Adolescent Mental Health",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=0SI4RybxWe6hNVxw75OrXA..&params=01U.3Mo9cmuy-ocSLXFpHPMY.TN5HnmFXj2k-Ew9BSjjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-9-12"
+      },
+      {
+        "title": "262 Safeguarding Children Supervision - Making a\n                                                Referral/Requesting Information",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=0SI4RybxWe6hNVxw75OrXA..&params=lZnLQ.qfGr2ZhoHOOxLaXQPH-u3li55s0yONbSOAtNnjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-9-13"
+      },
+      {
+        "title": "262 Safeguarding Children Supervision - Parental Substance\n                                                Misuse",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=0SI4RybxWe6hNVxw75OrXA..&params=uTvTjh4kyyTGgeorrC4sL1VS.qRmdGR3DBYqr-6sjVDjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-9-14"
+      },
+      {
+        "title": "262 Safeguarding Children Supervision - Prevent",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=0SI4RybxWe6hNVxw75OrXA..&params=yGY73QhDfW6ZNM53YqLl0p5UYd5GvKOkKreln2xFuu7jqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-9-15"
+      },
+      {
+        "title": "262 Safeguarding Children Supervision - Professional\n                                                Conversations/Exploitation",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=0SI4RybxWe6hNVxw75OrXA..&params=JdYvgXZDvNqN1sYmmPQs7vs4MUTUvVWTij0dT62YPKzjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-9-16"
+      },
+      {
+        "title": "262 Safeguarding Children Supervision - Sexual Abuse",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=0SI4RybxWe6hNVxw75OrXA..&params=RbMaiTIQ7z3M7ZbRulJ6kfU15LKUBEPejQfi.E6HHQbjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-9-17"
+      },
+      {
+        "title": "262 Safeguarding Children Supervision - FGM",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&params=Me2DJNZtnodGlCIS1c37E-nMjEfIhyaqG4w9D-8-5j7jqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-9-18"
+      },
+      {
+        "title": "262 Safeguarding Children Supervision - Understanding\n                                                Thresholds",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&params=KDUfJQRYeZkb.9cFgiW2TnCNEjCbba4VvNxob.Vt6nnjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-9-19"
+      },
+      {
+        "title": "262 Safeguarding Children Supervision - Domestic Abuse and\n                                                Impact on Children",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&params=Gh1e.3LWV1LWU-mLxKlBzZs229wwkq6EeHU8q13oeYDjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-9-20"
+      }
+    ],
+    "id": "cat-9",
+    "icon": "user-check"
+  },
+  {
+    "name": "Wound\n                                                Management",
+    "color": "#CC0000",
+    "courses": [
+      {
+        "title": "262 Wound Assessment Foundation Course",
+        "url": "\n                                            https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=ONLUVrPTQ-sOGsquQa_OTA..&params=tBncGbKq5qelyzVJNpc7TgdIIM7kidbpKT3K7bP.qczjqmc8GjONz5gXLyN7DUgptax8Rco9sNU9t8L0CNyxAA\n                                            ",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "btn-primary",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-10-1"
+      },
+      {
+        "title": "262 Wound Management (Acute and Community Inpatients)",
+        "url": "\n                                            https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=UXUs6ujQ2rXHOvrepJr7BA..&params=Bh2Uq0dooX8T9BjxMVE7D7khugmsy8EcLCRTrTJ5xrrjqmc8GjONz5gXLyN7DUgptax8Rco9sNU9t8L0CNyxAA\n                                            ",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "btn-primary",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-10-2"
+      },
+      {
+        "title": "262 Wound Management (Community Nurses)",
+        "url": "\n                                            https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=XxCnGtQvmgHopbhvaNneUA..&params=mHy4cWRMARI07BwTXTKkfxcpV1izOomVMpgavdHKg0zjqmc8GjONz5gXLyN7DUgptax8Rco9sNU9t8L0CNyxAA\n                                            ",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "btn-primary",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-10-3"
+      },
+      {
+        "title": "262 Prevention and Management of Pressure Ulcers",
+        "url": "\n                                            https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=XxCnGtQvmgHopbhvaNneUA..&params=8VLgYxgtWl1XAgzcjBiCnqi3ug9qEfYj4hO-MjgBsKzjqmc8GjONz5gXLyN7DUgptax8Rco9sNU9t8L0CNyxAA\n                                            ",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "btn-primary",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-10-4"
+      },
+      {
+        "title": "262 Tissue Viability for Midwives",
+        "url": "\n                                            https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=KaO3rBhusr8gJbe-TNpyZw..&params=9CsrZCfl97s9HLTMd6srzGUSiABvi0nhJKuh8nzvXJ-jqmc8GjONz5gXLyN7DUgptax8Rco9sNU9t8L0CNyxAA\n                                            ",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "btn-primary",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-10-5"
+      }
+    ],
+    "id": "cat-10",
+    "icon": "book-open"
+  },
+  {
+    "name": "Governance",
+    "color": "#D5759E",
+    "courses": [
+      {
+        "title": "262 Ulysses Risk Training",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=uNJo6YJlFgTCI8Ww_ARfNw..&params=QM1g561yCTNl3X6XEPrD7kQV.pUoOBcYqKqSr8Mceubjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-11-1"
+      },
+      {
+        "title": "262 Risk Masterclass",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=Dsbxm_hZ5Iev0A1HliRoQg..&params=ogXq4MMTbTZ1As8olvQqXZtM-pPo.hjtAfv.Ye2OKazjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-11-2"
+      },
+      {
+        "title": "262 How to Report an Incident on Ulysses",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&params=h8lc8wkiYtEd1QVXcR0qsdAeA5aRW-WHLcnlLGomePXjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-11-3"
+      },
+      {
+        "title": "262 How to Manage Incidents on Ulysses",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&params=EJKCv6Vgx71gFOd5dZdTJGesfmX2usNuchQeFfpUrCbjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-11-4"
+      },
+      {
+        "title": "262 Patient Safety Incident Response Framework (PSIRF)\n                                                Awareness Session",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&params=ffzyFgyZPqqgt1EUYKArlriD-SwrRKPJX.7TfGwmbObjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-11-5"
+      }
+    ],
+    "id": "cat-11",
+    "icon": "briefcase"
+  },
+  {
+    "name": "Health and\n                                                Wellbeing",
+    "color": "#ED7D31",
+    "courses": [
+      {
+        "title": "262 Mental Health Alertness in the Workplace",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&params=2etGK7eMBhW4zqA4mJM4yw-GoANU.7keU-akS3RC4GPjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-12-1"
+      },
+      {
+        "title": "262 Mental Health Alertness in the Workplace (online\n                                                course)",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&params=7UkW2NbBSwnXE-czhMqzWRuwKOTjFhVddJomD1a1.hjjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-12-2"
+      },
+      {
+        "title": "262 Mental Health First Aid Training (2 day course)",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&params=ySjRCTuVdCACOkvzhBpyFSkz.eK.wAQiv6p2auIvsl7jqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-12-3"
+      },
+      {
+        "title": "262 Mental Health First Aid Training (2 day online\n                                                course)",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&params=CBlomY-LgFykJ6dCqj3MIEBaVN57QdIhDR.HfLvim6rjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-12-4"
+      },
+      {
+        "title": "262 Mindfulness and Compassionate Mind Training\n                                                Introductory Session",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=XxCnGtQvmgHopbhvaNneUA..&params=yuWyDiwE5qjFdGpj.kjKwr94oDTSogIqkiGTxncRWbHjqmc8GjONz5gXLyN7DUgptax8Rco9sNU9t8L0CNyxAA\n                                            ",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-12-5"
+      },
+      {
+        "title": "262 The Power of the Breath",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=1qkyEeyPKu2d_RGIAmLPbw..&params=37wGNUETnCCgG8QxKSlhXX5-KtlJuoaiSpIAinNPYRrjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c\n                                            ",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-12-6"
+      },
+      {
+        "title": "262 How to Recover Faster After a Stressful Event",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=1qkyEeyPKu2d_RGIAmLPbw..&params=fbaIgRq-sLFpjD.wUirEn7yjwf0Jp8lidi90LDUoi67jqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c\n                                            ",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-12-7"
+      },
+      {
+        "title": "262 Sleep is Your Superpower",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=1qkyEeyPKu2d_RGIAmLPbw..&params=JDOtYJR3ebTGHxbVu3v9v372TzBqvwUGOUtskRe2JJ7jqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c\n                                            ",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-12-8"
+      },
+      {
+        "title": "262 Gut Health and The Brain Body Link",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=3oPW6tVM1Wa34cZ_Eq-_Dg..&params=8Csyd1-etrYESNsdupSCvMA6H.4p2q.1z5e998MGwo3jqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-12-9"
+      },
+      {
+        "title": "262 Hardwiring Happiness",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=3oPW6tVM1Wa34cZ_Eq-_Dg..&params=01kQOFBeR58VuoMezpi9vf7quu.indqmKuf3vXiBcjrjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-12-10"
+      },
+      {
+        "title": "262 Self-Compassion Course",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=S4L5BR7FNcCuKLkczST5BA..&params=Ni4gAtyOoz8xFHC6jHRIRdiAGzNHAAwCzCI9g9el1Jzjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-12-11"
+      },
+      {
+        "title": "262 Mental Health and Your Wellbeing",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=uNJo6YJlFgTCI8Ww_ARfNw..&params=VYMUxW8-.devLy1ninv4X.Grsbrf1-mEII6neaFZcLXjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-12-12"
+      },
+      {
+        "title": "262 Mindfulness for Mental Health and Wellbeing",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=uNJo6YJlFgTCI8Ww_ARfNw..&params=OhvCGQXswODo8d0f8TMlJ0snsKPpZs-iTYv8Nl38HWrjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-12-13"
+      },
+      {
+        "title": "262 Workplace Stress and Mental Health",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=uNJo6YJlFgTCI8Ww_ARfNw..&params=kEHYkOn2n4BPwwlpnj75kxJaafvxqPddhR36e94gaMTjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Virtual Classroom",
+        "classes": [
+          "btn",
+          "Button_VClassroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-12-14"
+      },
+      {
+        "title": "262 CBT Skills for Physical Healthcare Settings – Taster Day",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&params=rixxEMWPzMc5bXgCn7S1IB4gVqjDPU.VhNSLqTdRyqXjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-12-15"
+      }
+    ],
+    "id": "cat-12",
+    "icon": "book-open"
+  },
+  {
+    "name": "Vaccination and\n                                                Immunisation",
+    "color": "#FFC000",
+    "courses": [
+      {
+        "title": "262 Introduction to Vaccinations - Adults (& Children\n                                                Day 1) (347)",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=uNJo6YJlFgTCI8Ww_ARfNw..&params=Ed-xR8-7A-rhM.4ywwaqMlpJWKKuGj5i43sEXgNr.nbjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-13-1"
+      },
+      {
+        "title": "262 Introduction to Vaccinations - Children Day 2\n                                                (348)",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=uNJo6YJlFgTCI8Ww_ARfNw..&params=u-pxU.gByj6ZQqMJWPClCfWSige2X.REOwOJWT0Cl6Ljqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-13-2"
+      },
+      {
+        "title": "262 Annual Update - Adult Vaccinations (Interim) (349)",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=uNJo6YJlFgTCI8Ww_ARfNw..&params=lE6nB9a-6uwHgaMtQ-iM1u10GrH2YkajVBDcPpr7ytXjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-13-3"
+      },
+      {
+        "title": "262 Annual Update Adult Vaccinations - Year 4 (350)",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=uNJo6YJlFgTCI8Ww_ARfNw..&params=e.XXhr38G70PPzQIlWoDgZeSNiseid8qjiNo99prZjbjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-13-4"
+      },
+      {
+        "title": "262 Annual Update - Child Vaccination (351)",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=uNJo6YJlFgTCI8Ww_ARfNw..&params=olyRn6fF2Q.OsdYNwI89hHr0Qukmk3ZYGSy1mktcBP3jqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-13-5"
+      },
+      {
+        "title": "262 Annual Update - Child Vaccination Advisers (352)",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&oas=uNJo6YJlFgTCI8Ww_ARfNw..&params=C8MUsI9h6x5Mjcp3PzRBziIe9OARiNBR4DUuRBC7wnrjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-13-6"
+      }
+    ],
+    "id": "cat-13",
+    "icon": "book-open"
+  }
+];
+
+// Export for module systems (Node/ESM) or attach to global window for browser
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = { APP_CONFIG, GUIDES_DATA, FAQS_DATA, CATEGORIES_DATA };
+}
+
+
+/**
+ * NCIC Learning & Development Management Hub - Application Script
+ * ===============================================================
+ * Handles dynamic rendering, instant live search, multi-filtering,
+ * category accordions, bookmarking, modal guide viewer, and help drawers.
+ */
+
+(function () {
+  'use strict';
+
+  // --- State Management ---
+  const state = {
+    searchQuery: '',
+    selectedFormat: 'all', // 'all' | 'Classroom' | 'Virtual Classroom' | 'e-Learning'
+    selectedCategory: 'all',
+    expandedCategories: new Set(),
+    bookmarks: JSON.parse(localStorage.getItem('ncic_learning_bookmarks') || '[]'),
+    theme: localStorage.getItem('ncic_theme') || 'light'
+  };
+
+  // --- DOM Elements ---
+  const DOM = {
+    // Search & Filters
+    heroSearchInput: document.getElementById('heroSearchInput'),
+    heroSearchClear: document.getElementById('heroSearchClear'),
+    heroSearchBtn: document.getElementById('heroSearchBtn'),
+    formatFilters: document.querySelectorAll('.format-filter-pill'),
+    categoryJumpContainer: document.getElementById('categoryJumpContainer'),
+    expandAllBtn: document.getElementById('expandAllBtn'),
+    collapseAllBtn: document.getElementById('collapseAllBtn'),
+    resultsStatusBar: document.getElementById('resultsStatusBar'),
+    resultsCount: document.getElementById('resultsCount'),
+    resultsResetBtn: document.getElementById('resultsResetBtn'),
+
+    // Containers
+    categoriesContainer: document.getElementById('categoriesContainer'),
+    guidesContainer: document.getElementById('guidesContainer'),
+    faqsContainer: document.getElementById('faqsContainer'),
+    emptyState: document.getElementById('emptyState'),
+
+    // Stats
+    statTotalCourses: document.getElementById('statTotalCourses'),
+    statTotalCategories: document.getElementById('statTotalCategories'),
+    statTotalGuides: document.getElementById('statTotalGuides'),
+
+    // Drawers & Modals
+    helpDrawer: document.getElementById('helpDrawer'),
+    helpDrawerBackdrop: document.getElementById('helpDrawerBackdrop'),
+    btnHelpTrigger: document.getElementById('btnHelpTrigger'),
+    btnHelpClose: document.getElementById('btnHelpClose'),
+    waveClickTrigger: document.getElementById('waveClickTrigger'),
+
+    bookmarksDrawer: document.getElementById('bookmarksDrawer'),
+    bookmarksDrawerBackdrop: document.getElementById('bookmarksDrawerBackdrop'),
+    btnBookmarksTrigger: document.getElementById('btnBookmarksTrigger'),
+    btnBookmarksClose: document.getElementById('btnBookmarksClose'),
+    bookmarksList: document.getElementById('bookmarksList'),
+    bookmarkBadge: document.getElementById('bookmarkBadge'),
+    btnClearBookmarks: document.getElementById('btnClearBookmarks'),
+
+    guideModal: document.getElementById('guideModal'),
+    guideModalBackdrop: document.getElementById('guideModalBackdrop'),
+    guideModalTitle: document.getElementById('guideModalTitle'),
+    guideModalIframe: document.getElementById('guideModalIframe'),
+    btnGuideModalClose: document.getElementById('btnGuideModalClose'),
+
+    themeToggleBtn: document.getElementById('themeToggleBtn'),
+    toastNotification: document.getElementById('toastNotification')
+  };
+
+  // --- Initialization ---
+  function init() {
+    applyTheme(state.theme);
+    updateStats();
+    renderCategoryJumps();
+    renderCategories();
+    renderGuides();
+    renderFaqs();
+    updateBookmarkBadge();
+    bindEvents();
+    // All categories remain collapsed by default on initial load
+  }
+
+  // --- Theme Management ---
+  function applyTheme(theme) {
+    state.theme = theme;
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('ncic_theme', theme);
+    if (DOM.themeToggleBtn) {
+      DOM.themeToggleBtn.innerHTML = theme === 'dark' ? '☀️' : '🌙';
+      DOM.themeToggleBtn.setAttribute('title', theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode');
+    }
+  }
+
+  function toggleTheme() {
+    applyTheme(state.theme === 'dark' ? 'light' : 'dark');
+  }
+
+  // --- Stats Bar ---
+  function updateStats() {
+    const totalCourses = CATEGORIES_DATA.reduce((acc, cat) => acc + (cat.courses ? cat.courses.length : 0), 0);
+    if (DOM.statTotalCourses) DOM.statTotalCourses.textContent = totalCourses;
+    if (DOM.statTotalCategories) DOM.statTotalCategories.textContent = CATEGORIES_DATA.length;
+    if (DOM.statTotalGuides) DOM.statTotalGuides.textContent = GUIDES_DATA.length;
+  }
+
+  // --- Category Quick Jump Bar ---
+  function renderCategoryJumps() {
+    if (!DOM.categoryJumpContainer) return;
+    let html = `<a href="#catalogue" class="jump-pill active" data-cat-filter="all">All Categories</a>`;
+    CATEGORIES_DATA.forEach(cat => {
+      html += `<a href="#${cat.id}" class="jump-pill" data-cat-filter="${cat.id}">${cat.name} (${cat.courses.length})</a>`;
+    });
+    DOM.categoryJumpContainer.innerHTML = html;
+
+    DOM.categoryJumpContainer.querySelectorAll('.jump-pill').forEach(pill => {
+      pill.addEventListener('click', function (e) {
+        const catFilter = this.getAttribute('data-cat-filter');
+        DOM.categoryJumpContainer.querySelectorAll('.jump-pill').forEach(p => p.classList.remove('active'));
+        this.classList.add('active');
+
+        if (catFilter !== 'all') {
+          // Open target category accordion and scroll
+          state.expandedCategories.add(catFilter);
+          refreshCategoryExpansion();
+        }
+      });
+    });
+  }
+
+  // --- Render Categories & Courses ---
+  function renderCategories() {
+    if (!DOM.categoriesContainer) return;
+
+    const query = state.searchQuery.toLowerCase().trim();
+    let totalMatchingCourses = 0;
+    let totalMatchingCategories = 0;
+
+    let html = '';
+
+    CATEGORIES_DATA.forEach(cat => {
+      // Filter courses in this category
+      const matchingCourses = cat.courses.filter(course => {
+        // Format filter
+        if (state.selectedFormat !== 'all') {
+          if (course.delivery_type.toLowerCase() !== state.selectedFormat.toLowerCase()) {
+            return false;
+          }
+        }
+        // Search query filter
+        if (query) {
+          const matchTitle = course.title.toLowerCase().includes(query);
+          const matchCat = cat.name.toLowerCase().includes(query);
+          const matchType = course.delivery_type.toLowerCase().includes(query);
+          return matchTitle || matchCat || matchType;
+        }
+        return true;
+      });
+
+      if (matchingCourses.length === 0 && (query || state.selectedFormat !== 'all')) {
+        return; // Skip empty category when filtering
+      }
+
+      totalMatchingCategories++;
+      totalMatchingCourses += matchingCourses.length;
+
+      const isExpanded = state.expandedCategories.has(cat.id) || query.length > 0;
+      const catColor = cat.color || '#005EB8';
+      const catBg = hexToLightBg(catColor);
+
+      html += `
+        <div class="category-card ${isExpanded ? '' : 'collapsed'}" id="${cat.id}" style="--cat-color: ${catColor}; --cat-bg: ${catBg};">
+          <div class="category-header" role="button" tabindex="0" data-cat-toggle="${cat.id}" aria-expanded="${isExpanded}">
+            <div class="category-title-group">
+              <span class="category-icon">${getCategoryEmoji(cat.name)}</span>
+              <h3 class="category-title">${cat.name}</h3>
+              <span class="category-count-badge">${matchingCourses.length} ${matchingCourses.length === 1 ? 'course' : 'courses'}</span>
+            </div>
+            <span class="category-toggle-icon">▼</span>
+          </div>
+          <div class="category-body">
+            <div class="courses-grid">
+              ${matchingCourses.map(course => renderCourseCard(course, cat)).join('')}
+            </div>
+          </div>
+        </div>
+      `;
+    });
+
+    DOM.categoriesContainer.innerHTML = html;
+
+    // Update Results Bar
+    if (query || state.selectedFormat !== 'all') {
+      DOM.resultsStatusBar.style.display = 'flex';
+      DOM.resultsCount.innerHTML = `Showing <span>${totalMatchingCourses}</span> courses across <span>${totalMatchingCategories}</span> categories`;
+    } else {
+      DOM.resultsStatusBar.style.display = 'none';
+    }
+
+    // Show Empty State if 0 matches
+    if (totalMatchingCourses === 0) {
+      DOM.emptyState.style.display = 'block';
+    } else {
+      DOM.emptyState.style.display = 'none';
+    }
+
+    bindCategoryHeaderEvents();
+    bindCourseCardEvents();
+  }
+
+  function renderCourseCard(course, cat) {
+    const isBookmarked = state.bookmarks.some(b => b.id === course.id);
+    const formatClass = getFormatClass(course.delivery_type);
+    const highlightedTitle = highlightMatch(course.title, state.searchQuery);
+
+    return `
+      <div class="course-card" id="${course.id}">
+        <div class="course-card-top">
+          <span class="format-badge ${formatClass}">
+            ${getFormatIcon(course.delivery_type)} ${course.delivery_type}
+          </span>
+          <span class="course-code-tag">${cat.name.split(' ')[0]}</span>
+        </div>
+        <div class="course-title">${highlightedTitle}</div>
+        <div class="course-card-actions">
+          <a href="${course.url}" target="_blank" rel="noopener noreferrer" class="btn-book-esr" title="Launch course enrolment in ESR">
+            <span>Book / Launch in ESR</span> ↗
+          </a>
+          <button class="btn-bookmark ${isBookmarked ? 'bookmarked' : ''}" data-bookmark-id="${course.id}" title="${isBookmarked ? 'Remove from My Bookmarks' : 'Save to My Bookmarks'}">
+            ${isBookmarked ? '★' : '☆'}
+          </button>
+        </div>
+      </div>
+    `;
+  }
+
+  function getFormatClass(type) {
+    const t = (type || '').toLowerCase();
+    if (t.includes('virtual') || t.includes('teams')) return 'virtual';
+    if (t.includes('e-learning') || t.includes('elearning')) return 'elearning';
+    return 'classroom';
+  }
+
+  function getFormatIcon(type) {
+    const t = (type || '').toLowerCase();
+    if (t.includes('virtual') || t.includes('teams')) return '💻';
+    if (t.includes('e-learning') || t.includes('elearning')) return '🖥️';
+    return '👥';
+  }
+
+  function getCategoryEmoji(name) {
+    const emojis = {
+      'Clinical Skills': '🩺',
+      'Equality, Diversity and Inclusion': '🤝',
+      'Health and Safety': '🛡️',
+      'People Management Courses': '👥',
+      'Learning and Development': '🎓',
+      'Leadership 3,2,1': '🏆',
+      'Moving and Handling': '♿',
+      'Preceptorship': '🧭',
+      'Safeguarding': '🦺',
+      'Wound Management': '🩹',
+      'Governance': '📋',
+      'Health and Wellbeing': '🧘',
+      'Vaccination and Immunisation': '💉'
+    };
+    return emojis[name] || '📚';
+  }
+
+  function hexToLightBg(hex) {
+    // Soft fallback background tint
+    if (!hex || !hex.startsWith('#')) return '#F8FAFC';
+    return hex + '12'; // 7% opacity
+  }
+
+  function highlightMatch(text, query) {
+    if (!query || !query.trim()) return text;
+    const cleanQuery = query.trim().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const regex = new RegExp(`(${cleanQuery})`, 'gi');
+    return text.replace(regex, '<mark style="background-color: #FEF08A; color: #854D0E; padding: 0 2px; border-radius: 2px;">$1</mark>');
+  }
+
+  // --- Render Guides ---
+  function renderGuides() {
+    if (!DOM.guidesContainer) return;
+    let html = '';
+    GUIDES_DATA.forEach((guide, index) => {
+      const isPdf = guide.type === 'pdf' || guide.url.toLowerCase().includes('.pdf');
+      html += `
+        <div class="guide-card">
+          <div class="guide-badge-row">
+            <span class="guide-badge ${isPdf ? 'pdf' : 'interactive'}">
+              ${isPdf ? '📄 PDF Document' : '⚡ Interactive Scribe Guide'}
+            </span>
+          </div>
+          <div class="guide-title">${guide.title}</div>
+          <div class="guide-actions">
+            ${
+              isPdf
+                ? `<a href="${guide.url}" target="_blank" rel="noopener noreferrer" class="btn-guide-preview" style="background: var(--nhs-blue);">
+                     <span>Open PDF Guide</span> ↗
+                   </a>`
+                : `<button class="btn-guide-preview" data-guide-url="${guide.url}" data-guide-title="${guide.title}">
+                     <span>▶ Interactive Walkthrough</span>
+                   </button>
+                   <a href="${guide.url}" target="_blank" rel="noopener noreferrer" class="btn-guide-external" title="Open in new window">↗</a>`
+            }
+          </div>
+        </div>
+      `;
+    });
+    DOM.guidesContainer.innerHTML = html;
+
+    // Attach click for interactive guide modal
+    DOM.guidesContainer.querySelectorAll('.btn-guide-preview[data-guide-url]').forEach(btn => {
+      btn.addEventListener('click', function () {
+        const url = this.getAttribute('data-guide-url');
+        const title = this.getAttribute('data-guide-title');
+        openGuideModal(url, title);
+      });
+    });
+  }
+
+  // --- Render FAQs ---
+  function renderFaqs() {
+    if (!DOM.faqsContainer) return;
+    let html = '';
+    FAQS_DATA.forEach((faq, index) => {
+      html += `
+        <div class="faq-item" id="faq-${index + 1}">
+          <button class="faq-question-btn" data-faq-toggle="faq-${index + 1}" aria-expanded="false">
+            <span>${faq.question}</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-answer">
+            ${faq.answer}
+          </div>
+        </div>
+      `;
+    });
+    DOM.faqsContainer.innerHTML = html;
+
+    DOM.faqsContainer.querySelectorAll('.faq-question-btn').forEach(btn => {
+      btn.addEventListener('click', function () {
+        const parent = this.closest('.faq-item');
+        const isOpen = parent.classList.contains('open');
+        // Toggle current
+        parent.classList.toggle('open', !isOpen);
+        this.setAttribute('aria-expanded', !isOpen);
+      });
+    });
+  }
+
+  // --- ScribeHow Modal ---
+  function openGuideModal(url, title) {
+    if (!DOM.guideModal) return;
+    DOM.guideModalTitle.textContent = title || 'Interactive Guide';
+    // Embed iframe
+    const embedUrl = url.includes('/embed/') ? url : url.replace('/shared/', '/embed/');
+    DOM.guideModalIframe.src = embedUrl;
+    DOM.guideModal.classList.add('open');
+    DOM.guideModalBackdrop.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeGuideModal() {
+    if (!DOM.guideModal) return;
+    DOM.guideModalIframe.src = 'about:blank';
+    DOM.guideModal.classList.remove('open');
+    DOM.guideModalBackdrop.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // --- Sidenav Help Drawer ---
+  function openHelpDrawer() {
+    DOM.helpDrawer.classList.add('open');
+    DOM.helpDrawerBackdrop.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeHelpDrawer() {
+    DOM.helpDrawer.classList.remove('open');
+    DOM.helpDrawerBackdrop.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // --- Bookmarks Drawer ---
+  function openBookmarksDrawer() {
+    renderBookmarksList();
+    DOM.bookmarksDrawer.classList.add('open');
+    DOM.bookmarksDrawerBackdrop.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeBookmarksDrawer() {
+    DOM.bookmarksDrawer.classList.remove('open');
+    DOM.bookmarksDrawerBackdrop.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function toggleBookmark(courseId) {
+    // Find course across categories
+    let targetCourse = null;
+    let targetCategory = null;
+    for (const cat of CATEGORIES_DATA) {
+      const match = cat.courses.find(c => c.id === courseId);
+      if (match) {
+        targetCourse = match;
+        targetCategory = cat;
+        break;
+      }
+    }
+
+    if (!targetCourse) return;
+
+    const existingIndex = state.bookmarks.findIndex(b => b.id === courseId);
+    if (existingIndex >= 0) {
+      state.bookmarks.splice(existingIndex, 1);
+      showToast(`Removed "${targetCourse.title.substring(0, 30)}..." from bookmarks`);
+    } else {
+      state.bookmarks.push({
+        id: targetCourse.id,
+        title: targetCourse.title,
+        url: targetCourse.url,
+        delivery_type: targetCourse.delivery_type,
+        category: targetCategory.name
+      });
+      showToast(`Saved "${targetCourse.title.substring(0, 30)}..." to bookmarks!`);
+    }
+
+    localStorage.setItem('ncic_learning_bookmarks', JSON.stringify(state.bookmarks));
+    updateBookmarkBadge();
+    renderCategories();
+    renderBookmarksList();
+  }
+
+  function updateBookmarkBadge() {
+    if (DOM.bookmarkBadge) {
+      DOM.bookmarkBadge.textContent = state.bookmarks.length;
+      DOM.bookmarkBadge.style.display = state.bookmarks.length > 0 ? 'inline-flex' : 'none';
+    }
+  }
+
+  function renderBookmarksList() {
+    if (!DOM.bookmarksList) return;
+    if (state.bookmarks.length === 0) {
+      DOM.bookmarksList.innerHTML = `
+        <div style="text-align:center; padding: 2rem 1rem; color: var(--text-muted);">
+          <p style="font-size: 2rem; margin-bottom: 0.5rem;">☆</p>
+          <p>You have not saved any courses yet.</p>
+          <p style="font-size: 0.8rem; margin-top: 0.5rem;">Click the star icon next to any course in the catalogue to save it here for quick access.</p>
+        </div>
+      `;
+      return;
+    }
+
+    let html = '';
+    state.bookmarks.forEach(item => {
+      html += `
+        <li class="bookmark-item">
+          <div>
+            <span class="format-badge ${getFormatClass(item.delivery_type)}" style="font-size: 0.65rem; margin-bottom: 0.35rem;">
+              ${getFormatIcon(item.delivery_type)} ${item.delivery_type}
+            </span>
+            <div class="bookmark-item-title">${item.title}</div>
+            <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="btn-book-esr" style="margin-top: 0.5rem; display: inline-flex; padding: 0.35rem 0.75rem; font-size: 0.75rem;">
+              Launch in ESR ↗
+            </a>
+          </div>
+          <button class="bookmark-item-remove" data-remove-bookmark="${item.id}" title="Remove">✕</button>
+        </li>
+      `;
+    });
+    DOM.bookmarksList.innerHTML = html;
+
+    DOM.bookmarksList.querySelectorAll('[data-remove-bookmark]').forEach(btn => {
+      btn.addEventListener('click', function () {
+        const id = this.getAttribute('data-remove-bookmark');
+        toggleBookmark(id);
+      });
+    });
+  }
+
+  // --- Category Card Events ---
+  function bindCategoryHeaderEvents() {
+    document.querySelectorAll('[data-cat-toggle]').forEach(header => {
+      header.addEventListener('click', function () {
+        const catId = this.getAttribute('data-cat-toggle');
+        const parent = document.getElementById(catId);
+        if (!parent) return;
+
+        if (state.expandedCategories.has(catId)) {
+          state.expandedCategories.delete(catId);
+          parent.classList.add('collapsed');
+          this.setAttribute('aria-expanded', 'false');
+        } else {
+          state.expandedCategories.add(catId);
+          parent.classList.remove('collapsed');
+          this.setAttribute('aria-expanded', 'true');
+        }
+      });
+
+      header.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          this.click();
+        }
+      });
+    });
+  }
+
+  function bindCourseCardEvents() {
+    document.querySelectorAll('.btn-bookmark[data-bookmark-id]').forEach(btn => {
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        const id = this.getAttribute('data-bookmark-id');
+        toggleBookmark(id);
+      });
+    });
+  }
+
+  function refreshCategoryExpansion() {
+    CATEGORIES_DATA.forEach(cat => {
+      const el = document.getElementById(cat.id);
+      if (!el) return;
+      const isExp = state.expandedCategories.has(cat.id);
+      el.classList.toggle('collapsed', !isExp);
+      const hdr = el.querySelector('.category-header');
+      if (hdr) hdr.setAttribute('aria-expanded', isExp ? 'true' : 'false');
+    });
+  }
+
+  // --- Toast Notification ---
+  let toastTimer = null;
+  function showToast(message) {
+    if (!DOM.toastNotification) return;
+    DOM.toastNotification.textContent = message;
+    DOM.toastNotification.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+      DOM.toastNotification.classList.remove('show');
+    }, 3200);
+  }
+
+  // --- Global Event Bindings ---
+  function bindEvents() {
+    // Live Search
+    if (DOM.heroSearchInput) {
+      let debounceTimer = null;
+      DOM.heroSearchInput.addEventListener('input', function () {
+        const val = this.value;
+        state.searchQuery = val;
+        if (DOM.heroSearchClear) {
+          DOM.heroSearchClear.style.display = val.length > 0 ? 'inline-flex' : 'none';
+        }
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => {
+          renderCategories();
+        }, 150);
+      });
+    }
+
+    if (DOM.heroSearchClear) {
+      DOM.heroSearchClear.addEventListener('click', function () {
+        DOM.heroSearchInput.value = '';
+        state.searchQuery = '';
+        this.style.display = 'none';
+        renderCategories();
+        DOM.heroSearchInput.focus();
+      });
+    }
+
+    if (DOM.resultsResetBtn) {
+      DOM.resultsResetBtn.addEventListener('click', function () {
+        if (DOM.heroSearchInput) DOM.heroSearchInput.value = '';
+        if (DOM.heroSearchClear) DOM.heroSearchClear.style.display = 'none';
+        state.searchQuery = '';
+        state.selectedFormat = 'all';
+        DOM.formatFilters.forEach(pill => {
+          pill.classList.toggle('active', pill.getAttribute('data-format') === 'all');
+        });
+        renderCategories();
+      });
+    }
+
+    // Format Filter Pills
+    DOM.formatFilters.forEach(pill => {
+      pill.addEventListener('click', function () {
+        const format = this.getAttribute('data-format');
+        state.selectedFormat = format;
+        DOM.formatFilters.forEach(p => p.classList.remove('active'));
+        this.classList.add('active');
+        renderCategories();
+      });
+    });
+
+    // Expand All / Collapse All
+    if (DOM.expandAllBtn) {
+      DOM.expandAllBtn.addEventListener('click', function () {
+        CATEGORIES_DATA.forEach(cat => state.expandedCategories.add(cat.id));
+        refreshCategoryExpansion();
+      });
+    }
+
+    if (DOM.collapseAllBtn) {
+      DOM.collapseAllBtn.addEventListener('click', function () {
+        state.expandedCategories.clear();
+        refreshCategoryExpansion();
+      });
+    }
+
+    // Drawer Triggers
+    if (DOM.btnHelpTrigger) DOM.btnHelpTrigger.addEventListener('click', openHelpDrawer);
+    if (DOM.btnHelpClose) DOM.btnHelpClose.addEventListener('click', closeHelpDrawer);
+    if (DOM.helpDrawerBackdrop) DOM.helpDrawerBackdrop.addEventListener('click', closeHelpDrawer);
+    if (DOM.waveClickTrigger) DOM.waveClickTrigger.addEventListener('click', openHelpDrawer);
+
+    if (DOM.btnBookmarksTrigger) DOM.btnBookmarksTrigger.addEventListener('click', openBookmarksDrawer);
+    if (DOM.btnBookmarksClose) DOM.btnBookmarksClose.addEventListener('click', closeBookmarksDrawer);
+    if (DOM.bookmarksDrawerBackdrop) DOM.bookmarksDrawerBackdrop.addEventListener('click', closeBookmarksDrawer);
+
+    if (DOM.btnClearBookmarks) {
+      DOM.btnClearBookmarks.addEventListener('click', function () {
+        if (confirm('Clear all saved bookmarks?')) {
+          state.bookmarks = [];
+          localStorage.removeItem('ncic_learning_bookmarks');
+          updateBookmarkBadge();
+          renderCategories();
+          renderBookmarksList();
+          showToast('Bookmarks cleared');
+        }
+      });
+    }
+
+    // Modal Triggers
+    if (DOM.btnGuideModalClose) DOM.btnGuideModalClose.addEventListener('click', closeGuideModal);
+    if (DOM.guideModalBackdrop) {
+      DOM.guideModalBackdrop.addEventListener('click', function (e) {
+        if (e.target === DOM.guideModalBackdrop) closeGuideModal();
+      });
+    }
+
+    // Theme Toggle
+    if (DOM.themeToggleBtn) DOM.themeToggleBtn.addEventListener('click', toggleTheme);
+
+    // Keyboard ESC to close any drawer or modal
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        closeHelpDrawer();
+        closeBookmarksDrawer();
+        closeGuideModal();
+      }
+    });
+  }
+
+  // --- Expose for external access / debugging ---
+  window.NCICApp = {
+    state,
+    openHelpDrawer,
+    closeHelpDrawer,
+    openBookmarksDrawer,
+    closeBookmarksDrawer,
+    openGuideModal,
+    closeGuideModal
+  };
+
+  // Run on DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+
+  </script>
+</body>
+</html>

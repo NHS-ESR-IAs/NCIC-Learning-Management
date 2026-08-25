@@ -1772,6 +1772,18 @@ const CATEGORIES_DATA = [
           "h-100"
         ],
         "id": "course-12-14"
+      },
+      {
+        "title": "262 CBT Skills for Physical Healthcare Settings – Taster Day",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&params=rixxEMWPzMc5bXgCn7S1IB4gVqjDPU.VhNSLqTdRyqXjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-12-15"
       }
     ],
     "id": "cat-12",
