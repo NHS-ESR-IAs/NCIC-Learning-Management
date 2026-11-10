@@ -14,7 +14,7 @@ NCIC-Learning-Management/
 ├── css/
 │   └── styles.css      # NHS Digital design tokens, animated wave SVG, responsive styling & dark mode
 ├── js/
-│   ├── data.js         # Central data store (all 136 courses, 13 categories, 7 guides, 7 FAQs)
+│   ├── data.js         # Central data store (all 137 courses, 13 categories, 7 guides, 7 FAQs)
 │   └── app.js          # Interactive features (live search, multi-filtering, drawer, bookmarks)
 ├── OldCode.html        # Original legacy LifeRay snippet (reference archive)
 └── README.md           # Documentation & maintainer guide
@@ -24,7 +24,7 @@ NCIC-Learning-Management/
 
 ## ✨ Features
 
-- **Complete Data Fidelity:** Replicates all **136 courses across 13 categories**, 7 ScribeHow & PDF guides, and 7 FAQs from the original snippet.
+- **Complete Data Fidelity:** Replicates all **137 courses across 13 categories**, 7 ScribeHow & PDF guides, and 7 FAQs from the original snippet.
 - **Instant Live Search:** Real-time search across course titles, categories, keywords, and delivery formats with debounce and keyword highlighting.
 - **Delivery Format Multi-Filtering:** Easily filter between 👥 *Classroom*, 💻 *Virtual Classroom (MS Teams)*, and 🖥️ *e-Learning*.
 - **Interactive ScribeHow Walkthroughs:** In-page modal viewer for interactive guides as well as direct link options.

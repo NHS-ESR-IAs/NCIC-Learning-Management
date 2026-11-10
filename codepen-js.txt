@@ -16,7 +16,7 @@ const APP_CONFIG = {
   hubTitle: 'Learning & Development Hub',
   hubSubtitle: 'Course Catalogue, Compliance Guidance & ESR Booking Portal',
   supportEmail: 'LearningDevelopment@ncic.nhs.uk',
-  lastUpdated: 'August 2026',
+  lastUpdated: 'November 2026',
   version: '2.0.0'
 };
 
@@ -597,6 +597,18 @@ const CATEGORIES_DATA = [
           "h-100"
         ],
         "id": "course-1-42"
+      },
+      {
+        "title": "262 Food Allergy Management for Ward Staff",
+        "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&params=skRzIoic1kuQv.ZsADblpvOhn8m9yAqpbR2cZ0nWf9zjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
+        "delivery_type": "Classroom",
+        "classes": [
+          "btn",
+          "Button_Classroom",
+          "btn-block",
+          "h-100"
+        ],
+        "id": "course-1-43"
       }
     ],
     "id": "cat-1",
