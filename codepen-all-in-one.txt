@@ -2626,10 +2626,10 @@ const CATEGORIES_DATA = [
       {
         "title": "262 Food Allergy Management for Ward Staff",
         "url": "https://my.esr.nhs.uk:443/OA_HTML/RF.jsp?function_id=18931&resp_id=-1&resp_appl_id=-1&security_group_id=0&lang_code=US&params=skRzIoic1kuQv.ZsADblpvOhn8m9yAqpbR2cZ0nWf9zjqmc8GjONz5gXLyN7DUgpolGCdLYoiv5z9-CiuyyplscZXUiFSbGwKJ2TS0fMk1c",
-        "delivery_type": "Classroom",
+        "delivery_type": "Virtual Classroom",
         "classes": [
           "btn",
-          "Button_Classroom",
+          "Button_VClassroom",
           "btn-block",
           "h-100"
         ],
